@@ -1,0 +1,187 @@
+{
+  "name": "",
+  "version": "0.0.0",
+  "main": "",
+  "scripts": {
+    "start": "concurrently 'npm run watch:lint' 'npm run watch:test' --raw",
+    "lint": "tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude '**/*.js'; eslint --ignore-path .gitignore",
+    "format": "eslint . --ignore-path .gitignore --fix",
+    "test": "nyc --require ts-node/register ava",
+    "watch:lint": "chokidar '**/*.{ts,js}' --ignore node_modules/ --verbose --command 'tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude \"**/*.js\" {path}; eslint {path}'",
+    "watch:test": "ava --watch",
+    "snapshot": "ava --update-snapshots",
+    "build": "tsc"
+  },
+  "repository": {},
+  "keywords": [],
+  "author": "Donald Tetto <donald@tetto.org>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bustle/mobiledoc-vdom-renderer/issues"
+  },
+  "homepage": "https://github.com/bustle/mobiledoc-vdom-renderer#readme",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "chokidar-cli": "^1.2.0",
+    "concurrently": "^3.5.1",
+    "eslint": "^4.18.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-ava": "^4.5.1",
+    "eslint-plugin-fp": "^2.3.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nyc": "^11.4.1",
+    "preact": "^8.2.7",
+    "preact-render-to-string": "^3.7.0",
+    "prettier": "^1.10.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^2.7.2",
+    "typescript-eslint-parser": "^13.0.0"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": false,
+    "singleQuote": true
+  },
+  "ava": {
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "coverage"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "all": true
+  },
+  "eslintConfig": {
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+      "prettier",
+      "fp",
+      "ava"
+    ],
+    "extends": [
+      "standard",
+      "plugin:fp/recommended",
+      "plugin:ava/recommended"
+    ],
+    "rules": {
+      "indent": "off",
+      "prettier/prettier": "error",
+      "arrow-body-style": "error",
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "complexity": [
+        "error",
+        {
+          "max": 4
+        }
+      ],
+      "import/order": "error",
+      "max-depth": [
+        "error",
+        {
+          "max": 4
+        }
+      ],
+      "max-len": [
+        "error",
+        {
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true,
+          "ignoreTrailingComments": true
+        }
+      ],
+      "max-nested-callbacks": [
+        "error",
+        {
+          "max": 4
+        }
+      ],
+      "max-params": [
+        "error",
+        {
+          "max": 3
+        }
+      ],
+      "max-statements-per-line": [
+        "error",
+        {
+          "max": 1
+        }
+      ],
+      "max-statements": [
+        "error",
+        {
+          "max": 6
+        }
+      ],
+      "no-param-reassign": [
+        "error",
+        {
+          "props": true
+        }
+      ],
+      "no-shadow": "error",
+      "no-use-before-define": [
+        "error",
+        {
+          "functions": true,
+          "classes": true
+        }
+      ],
+      "no-var": "error",
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "object-shorthand": [
+        "error",
+        "always"
+      ],
+      "prefer-const": "error"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/*.ts"
+        ],
+        "rules": {
+          "no-unused-vars": "off",
+          "no-undef": "off"
+        }
+      },
+      {
+        "files": [
+          "**/*.test.js"
+        ],
+        "rules": {
+          "fp/no-unused-expression": "off",
+          "fp/no-nil": "off"
+        }
+      }
+    ]
+  },
+  "dependencies": {}
+}
