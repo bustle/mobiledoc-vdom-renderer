@@ -6,7 +6,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "target": "ESNext",
+    "target": "ES2015",
     "module": "CommonJS",
     "lib": ["ESNext"],
     "moduleResolution": "Node",

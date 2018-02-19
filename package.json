@@ -1,7 +1,8 @@
 {
-  "name": "",
-  "version": "0.0.0",
-  "main": "",
+  "name": "@bustle/mobiledoc-vdom-renderer",
+  "version": "0.0.3",
+  "description": "Render Mobiledoc as VDOM, for React or React-like `createElement` calls",
+  "main": "dist/index.js",
   "scripts": {
     "start": "concurrently 'npm run watch:lint' 'npm run watch:test' --raw",
     "lint": "tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude '**/*.js'; eslint --ignore-path .gitignore",
@@ -12,8 +13,18 @@
     "snapshot": "ava --update-snapshots",
     "build": "tsc"
   },
-  "repository": {},
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bustle/mobiledoc-vdom-renderer.git"
+  },
+  "keywords": [
+    "mobiledoc",
+    "vdom",
+    "react",
+    "preact",
+    "hyperscript",
+    "createElement"
+  ],
   "author": "Donald Tetto <donald@tetto.org>",
   "license": "ISC",
   "bugs": {
