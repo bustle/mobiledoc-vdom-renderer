@@ -1,6 +1,10 @@
 import test from 'ava'
-import subject from '.'
+import pipe from '.'
 
 test(t => {
-  subject && t.fail(`No tests were specified.`)
+  const shout = pipe([
+    str => str.toUpperCase(),
+    str => str.replace(/(!)/g, '$1$1$1')
+  ])
+  t.snapshot(shout('Hello!'))
 })

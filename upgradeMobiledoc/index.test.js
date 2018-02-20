@@ -1,6 +1,9 @@
 import test from 'ava'
-import subject from '.'
+import upgradeMobiledoc from '.'
 
-test(t => {
-  subject && t.fail(`No tests were specified.`)
-})
+const mobiledoc02x = {
+  version: '0.2.0',
+  sections: [[], [[1, 'pull-quote', [[[], 0, 'marker content']]]]]
+}
+
+test(t => t.snapshot(upgradeMobiledoc(mobiledoc02x)))

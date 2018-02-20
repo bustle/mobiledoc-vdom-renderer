@@ -1,12 +1,15 @@
 import test from 'ava'
 import testRenderPipelines from '../../test/helpers/testRenderPipelines'
-import ListSectionRenderer from '.'
+import MarkupSectionRenderer from '.'
 
-const markupSection = []
+const markupSection = [1, 'p', [[0, [], 0, 'Example']]]
 
 testRenderPipelines(({ name, createElement, renderHtml }) => {
-  const renderVdom = ListSectionRenderer({ createElement })
+  const renderVdom = MarkupSectionRenderer({
+    createElement,
+    getElement: tagName => tagName
+  })({})
 
-  test(`${name}: renders a basic markup section`, t =>
+  test(`${name}: renders a markup section`, t =>
     t.snapshot(renderHtml(renderVdom(markupSection))))
 })

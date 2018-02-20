@@ -2,11 +2,14 @@ import test from 'ava'
 import testRenderPipelines from '../../test/helpers/testRenderPipelines'
 import ImageSectionRenderer from '.'
 
-const imageSection = []
+const imageSection = [2, '/photo.jpg']
 
 testRenderPipelines(({ name, createElement, renderHtml }) => {
-  const renderVdom = ImageSectionRenderer({ createElement })
+  const renderVdom = ImageSectionRenderer({
+    createElement,
+    getElement: tagName => tagName
+  })
 
-  test(`${name}: renders a basic image section`, t =>
+  test(`${name}: renders an image section`, t =>
     t.snapshot(renderHtml(renderVdom(imageSection))))
 })

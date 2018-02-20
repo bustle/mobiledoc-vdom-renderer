@@ -2,15 +2,12 @@ import test from 'ava'
 import testRenderPipelines from '../../../test/helpers/testRenderPipelines'
 import MarkerContentRenderer from '.'
 
-const getMarkerContentComponent = type => type
-
-const markerContent = []
+const markerContent = [0, [], 0, 'Marker content']
 
 testRenderPipelines(({ name, createElement, renderHtml }) => {
   const renderVdom = MarkerContentRenderer({
-    createElement,
-    getMarkerContentComponent
-  })
+    createElement
+  })({})
 
   test(`${name}: renders basic marker content`, t =>
     t.snapshot(renderHtml(renderVdom(markerContent))))

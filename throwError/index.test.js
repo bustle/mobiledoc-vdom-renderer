@@ -1,6 +1,7 @@
 import test from 'ava'
-import subject from '.'
+import throwError from '.'
 
 test(t => {
-  subject && t.fail(`No tests were specified.`)
+  const message = 'This test should throw this error.'
+  t.throws(() => throwError(message), `MobiledocVdomRenderer: ${message}`)
 })
