@@ -2,11 +2,7 @@
 
 ## Installation
 
-`npm install @bustle/mobiledoc-vdom-renderer --save`
-
-or
-
-`yarn add @bustle/mobiledoc-vdom-renderer`
+`npm install @bustle/mobiledoc-vdom-renderer --save` or `yarn add @bustle/mobiledoc-vdom-renderer`
 
 ## Usage
 ```jsx
@@ -32,6 +28,7 @@ To get started, clone this repository and run `npm install`.
 Running `npm start` watches for changes, then lints and tests each file you touch. (Watching is provided by [`chokidar-cli`](https://github.com/kimmobrunfeldt/chokidar-cli).)
 
 ### Other useful commands
-* `npm run format`: Executes [`prettier`](https://github.com/prettier/prettier) to format the code ([`esLint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) ensures that unformatted code fails linting)
+* `npm run format`: Fixes all automatically-fixable linting errors; in particular, applies [`prettier`](https://github.com/prettier/prettier) via [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) which reformats code by convention
 * `npm run lint`: Executes typescript type-checking; [`tslint`](https://github.com/palantir/tslint) and [`eslint`](https://github.com/eslint/eslint) enforce [Standard style](https://standardjs.com/) and some functional programming best practices
-* `npm test`: Run all tests once (testing by [`ava`](https://github.com/avajs/ava)) and generate a coverage report with [`nyc`](https://github.com/istanbuljs/nyc)
+* `npm test`: Run all tests once (with [`ava`](https://github.com/avajs/ava)) and generate a coverage report with [`nyc`](https://github.com/istanbuljs/nyc)
+* `npm run snapshot`: This project uses [snapshot testing](https://github.com/avajs/ava#snapshot-testing) to compare observed output to expected output. This command updates all snapshots, so check your diff and make sure any changes look right!
