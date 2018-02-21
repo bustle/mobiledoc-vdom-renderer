@@ -2,7 +2,7 @@
 
 ## Installation
 
- `yarn add @bustle/mobiledoc-vdom-renderer` or `npm install @bustle/mobiledoc-vdom-renderer --save`
+`npm install @bustle/mobiledoc-vdom-renderer --save` or `yarn add @bustle/mobiledoc-vdom-renderer`
 
 ## Usage
 ```jsx
