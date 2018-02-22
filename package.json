@@ -44,7 +44,9 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
+    "jsdom": "^11.6.2",
     "nyc": "^11.4.1",
+    "picodom": "^1.0.2",
     "preact": "^8.2.7",
     "preact-render-to-string": "^3.7.0",
     "prettier": "^1.10.2",
@@ -185,7 +187,8 @@
       },
       {
         "files": [
-          "**/*.test.js"
+          "**/*.test.js",
+          "test/**/*.js"
         ],
         "rules": {
           "fp/no-unused-expression": "off",

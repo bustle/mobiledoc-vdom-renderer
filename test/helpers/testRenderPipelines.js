@@ -1,16 +1,27 @@
+import { JSDOM } from 'jsdom'
+import { h as picodomCreateElement, patch as picodomMount } from 'picodom'
 import { h as preactCreateElement } from 'preact'
 import preactRender from 'preact-render-to-string'
 import { createElement as reactCreateElement } from 'react'
 import { renderToString as reactRender } from 'react-dom/server'
 
-/* Needs a browser test with live dom! :D */
+global.document = new JSDOM(`<html><body></body></html>`).window.document // eslint-disable-line fp/no-mutation
+
+const picodomRender = vdom => {
+  picodomMount(undefined, vdom, document.body)
+  return document.body.innerHTML
+}
 
 const pipelines = [
   {
+    name: 'picodom',
+    createElement: picodomCreateElement,
+    renderHtml: nodes => picodomRender(picodomCreateElement('root', {}, nodes)) // picodom requires a root node
+  },
+  {
     name: 'preact',
     createElement: preactCreateElement,
-    renderHtml: children =>
-      preactRender(preactCreateElement('root', {}, children)) // preact requires a root node
+    renderHtml: nodes => preactRender(preactCreateElement('root', {}, nodes)) // preact requires a root node
   },
   {
     name: 'react',
@@ -19,4 +30,6 @@ const pipelines = [
   }
 ]
 
-export default test => pipelines.forEach(test)
+export default test => {
+  pipelines.forEach(test)
+}
