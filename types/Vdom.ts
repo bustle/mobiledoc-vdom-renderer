@@ -8,5 +8,5 @@ export type Component = string | ((props: object) => Node)
 export type Renderer = (
   el: string | Component,
   props?: object,
-  children?: Node[]
+  ...children: Node[] // eslint-disable-line fp/no-rest-parameters
 ) => any

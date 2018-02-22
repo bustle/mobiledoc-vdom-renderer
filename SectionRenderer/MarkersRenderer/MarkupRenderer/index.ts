@@ -27,5 +27,5 @@ export default ({ createElement, getElement }: Options) => (
         `Unhandled element: the markup tag name \`'${tagName}'\` has no corresponding handler.`
       ),
     attributesArrayToAttributes(attributesArray),
-    children
+    ...children
   )

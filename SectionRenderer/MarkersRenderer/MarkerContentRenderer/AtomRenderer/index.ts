@@ -19,5 +19,5 @@ export default ({ createElement, getAtomComponent }: Options) => ([
         `Unhandled atom: \`getAtomComponent('${type}')\` did not return a corresponding component.`
       ),
     payload,
-    [text]
+    text
   )

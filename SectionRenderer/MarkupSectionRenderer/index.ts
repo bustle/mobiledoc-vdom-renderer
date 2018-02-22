@@ -25,7 +25,7 @@ export default ({ createElement, getAtomComponent, getElement }: Options) => ({
         `Unhandled element: the markup section \`'${tagName}'\` has no corresponding handler.`
       ),
     {},
-    MarkersRenderer({ createElement, getAtomComponent, getElement })({
+    ...MarkersRenderer({ createElement, getAtomComponent, getElement })({
       markups,
       atoms
     })(markers)
