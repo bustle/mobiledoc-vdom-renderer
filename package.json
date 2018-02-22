@@ -1,6 +1,6 @@
 {
   "name": "@bustle/mobiledoc-vdom-renderer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Render Mobiledoc as VDOM, for React or React-like `createElement` calls",
   "main": "dist/index.js",
   "scripts": {

@@ -12,7 +12,7 @@ const attributesArrayToAttributes = (attributesArray: string[]): object =>
     {}
   )
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getElement: Renderer.ComponentGetter
 }

@@ -2,7 +2,9 @@ import pipe from '../../pipe'
 import * as Mobiledoc from '../../types/Mobiledoc'
 import * as Vdom from '../../types/Vdom'
 import * as Renderer from '../../types/Renderer'
-import MarkupRenderer from './MarkupRenderer'
+import MarkupRenderer, {
+  Options as MarkupRendererOptions
+} from './MarkupRenderer'
 import MarkerContentRenderer from './MarkerContentRenderer'
 
 interface MarkupNode {
@@ -34,33 +36,32 @@ const MarkerMarkupNodesOpener = ({ markups }: MarkerMarkupsOpenerContext) => ([
   }))
 ]
 
-interface MarkerMarkupsCloserOptions {
-  createElement: Vdom.Renderer
-  getElement: Renderer.ComponentGetter
-}
+const MarkupNodesRenderer = ({
+  createElement,
+  getElement
+}: MarkupRendererOptions) => (nodes: MarkupNode[]): Vdom.Node =>
+  nodes.reduceRight(
+    (innerNode: Vdom.Node, { markup, children }: MarkupNode): Vdom.Node =>
+      markup
+        ? MarkupRenderer({ createElement, getElement })(markup, [
+            ...children,
+            innerNode
+          ])
+        : [...children, innerNode],
+    []
+  )
 
 const MarkerMarkupNodesCloser = ({
   createElement,
   getElement
-}: MarkerMarkupsCloserOptions) => ([
-  ,
-  ,
-  closedMarkupCount
-]: Mobiledoc.Marker) => (nodes: MarkupNode[]): MarkupNode[] =>
+}: MarkupRendererOptions) => ([, , closedMarkupCount]: Mobiledoc.Marker) => (
+  nodes: MarkupNode[]
+): MarkupNode[] =>
   closedMarkupCount
     ? MarkupNodesChildAppender(
-        nodes
-          .slice(-closedMarkupCount)
-          .reduceRight(
-            (innerNode: Vdom.Node, { markup, children }): Vdom.Node =>
-              markup
-                ? MarkupRenderer({ createElement, getElement })(markup, [
-                    ...children,
-                    innerNode
-                  ])
-                : [...children, innerNode],
-            []
-          )
+        MarkupNodesRenderer({ createElement, getElement })(
+          nodes.slice(-closedMarkupCount)
+        )
       )(nodes.slice(0, -closedMarkupCount))
     : nodes
 
