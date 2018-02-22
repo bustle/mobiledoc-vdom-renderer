@@ -20,7 +20,10 @@ export { upgradeMobiledoc }
 
 /* Enforce Mobiledoc tag whitelist: */
 
-const VALID_ELEMENT_TAGNAMES = Object.values({
+const values = (object: { [key: string]: any }): any[] =>
+  Object.keys(object).map(key => object[key])
+
+const VALID_ELEMENT_TAGNAMES: string[] = values({
   ...MobiledocTypes.MarkupSectionTagName,
   ...MobiledocTypes.ImageSectionTagName,
   ...MobiledocTypes.ListSectionTagName,
@@ -31,7 +34,7 @@ const VALID_ELEMENT_TAGNAMES = Object.values({
 export const getElementDefault: Renderer.ComponentGetter = (
   tagName: string
 ): Vdom.Component =>
-  VALID_ELEMENT_TAGNAMES.includes(tagName)
+  VALID_ELEMENT_TAGNAMES.indexOf(tagName) !== -1
     ? tagName
     : throwError(`\`${tagName}\` is not a supported Mobiledoc tag.`)
 
