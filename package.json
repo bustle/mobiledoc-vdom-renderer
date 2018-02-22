@@ -115,7 +115,7 @@
       "max-depth": [
         "error",
         {
-          "max": 4
+          "max": 2
         }
       ],
       "max-len": [
@@ -129,7 +129,7 @@
       "max-nested-callbacks": [
         "error",
         {
-          "max": 4
+          "max": 2
         }
       ],
       "max-params": [
