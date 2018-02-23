@@ -12,7 +12,9 @@
     "watch:lint": "chokidar '**/*.{ts,js}' --ignore node_modules/ --verbose --command 'tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude \"**/*.js\" {path}; eslint {path}'",
     "watch:test": "ava --watch",
     "start": "concurrently 'npm run watch:lint' 'npm run watch:test' --raw",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "npm test && rm -rf dist && npm run build",
+    "postpublish": "rm -rf dist"
   },
   "repository": {
     "type": "git",
