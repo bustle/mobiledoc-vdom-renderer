@@ -2,12 +2,13 @@ import test from 'ava'
 import testRenderPipelines from '../../../test/helpers/testRenderPipelines'
 import CardRenderer from '.'
 
-const card = ['card-type', {}]
+const card = ['card-type', { attribute: 'foo', value: 'bar' }]
 
 testRenderPipelines(({ name, createElement, renderHtml }) => {
   const renderVdom = CardRenderer({
     createElement,
-    getCardComponent: type => type
+    getCardComponent: type => ({ payload }) =>
+      createElement(type, { attribute: payload.attribute }, payload.value)
   })
 
   test(`${name}: renders a basic card`, t =>
