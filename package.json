@@ -4,13 +4,14 @@
   "description": "Render Mobiledoc as VDOM, for React or React-like `createElement` calls",
   "main": "dist/index.js",
   "scripts": {
-    "start": "concurrently 'npm run watch:lint' 'npm run watch:test' --raw",
     "lint": "tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude '**/*.js'; eslint . --ignore-path .gitignore",
     "format": "eslint . --ignore-path .gitignore --fix",
-    "test": "npm run lint; nyc --require ts-node/register ava",
+    "test:js": "nyc --require ts-node/register ava",
+    "test": "npm run lint && npm run test:js",
+    "snapshot": "ava --update-snapshots",
     "watch:lint": "chokidar '**/*.{ts,js}' --ignore node_modules/ --verbose --command 'tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude \"**/*.js\" {path}; eslint {path}'",
     "watch:test": "ava --watch",
-    "snapshot": "ava --update-snapshots",
+    "start": "concurrently 'npm run watch:lint' 'npm run watch:test' --raw",
     "build": "tsc"
   },
   "repository": {
