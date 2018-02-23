@@ -9,10 +9,10 @@ testRenderPipelines(({ name, createElement, renderHtml }) => {
     createElement,
     getAtomComponent: type =>
       name === 'picodom'
-        ? (payload, children) =>
+        ? ({ payload }, children) =>
             createElement(type, { attribute: payload.attribute }, children)
-        : ({ attribute, children }) =>
-            createElement(type, { attribute }, children)
+        : ({ payload, children }) =>
+            createElement(type, { attribute: payload.attribute }, children)
   })
 
   test(`${name}: renders a basic atom`, t =>
