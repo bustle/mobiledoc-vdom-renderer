@@ -1,76 +1,30 @@
-import Mobiledoc, * as MobiledocTypes from '../types/Mobiledoc'
+import Mobiledoc from '../types/Mobiledoc'
+import Mobiledoc02x from '../types/Mobiledoc02x'
 
-const TARGET_VERSION = '0.3.1'
+import upgradeMobiledoc02x from './0.2.x-0.3.x'
+import pipe from '../pipe'
 
-const extractMinorVersion = (version: string) =>
-  version
-    .split('.')
-    .slice(0, 2)
-    .join('.')
+export const TARGET_VERSION = '0.3.1'
 
-export const matchesMinorVersion = (a: string) => (b: string) =>
-  extractMinorVersion(a) === extractMinorVersion(b)
+const parseIntWithRadix = (str: string) => parseInt(str, 10)
 
-/* '0.2.x' format */
+const map = (fn: (item: any) => any) => (arr: any[]): any[] => arr.map(fn)
 
-interface Marker02x extends Array<any> {
-  0: number[]
-  1: number
-  2: string
+const split = (char: string) => (str: string): string[] => str.split(char)
+
+export const parseVersion = pipe([
+  split('.'),
+  map(parseIntWithRadix),
+  ([major, minor, patch]) => ({ major, minor, patch })
+])
+
+const matchesMinor = (target: string) => (version: string): boolean => {
+  const targetVersion = parseVersion(target)
+  const { major, minor } = parseVersion(version)
+  return major === targetVersion.major && minor === targetVersion.minor
 }
 
-interface Section02x extends Array<any> {
-  0: MobiledocTypes.SectionTypeIdentifier
-  1: string | number
-  2?: Marker02x[] | object
-}
-
-interface Accumulator {
-  cards: MobiledocTypes.Card[]
-  sections: MobiledocTypes.Section[]
-}
-
-export default (mobiledoc: Mobiledoc): Mobiledoc =>
-  matchesMinorVersion(TARGET_VERSION)(mobiledoc.version)
-    ? mobiledoc
-    : {
-        ...mobiledoc,
-        version: TARGET_VERSION,
-        markups: mobiledoc.sections[0],
-        ...mobiledoc.sections[1].reduce(
-          ({ cards, sections }: Accumulator, section: Section02x) =>
-            section[0] === MobiledocTypes.SectionTypeIdentifier.CARD
-              ? {
-                  cards: [
-                    ...cards,
-                    [section[1], section[2]] as MobiledocTypes.Card
-                  ],
-                  sections: [
-                    ...sections,
-                    [
-                      MobiledocTypes.SectionTypeIdentifier.CARD,
-                      cards.length
-                    ] as MobiledocTypes.CardSection
-                  ]
-                }
-              : {
-                  cards,
-                  sections: [
-                    ...sections,
-                    [
-                      section[0],
-                      section[1] === 'pull-quote' ? 'aside' : section[1],
-                      (section[2] as Marker02x[]).map(
-                        (marker): MobiledocTypes.Marker =>
-                          [
-                            MobiledocTypes.MarkerTypeIdentifier.TEXT,
-                            ...marker
-                          ] as MobiledocTypes.Marker
-                      )
-                    ] as MobiledocTypes.Section
-                  ]
-                },
-          { cards: [], sections: [] }
-        ),
-        atoms: []
-      }
+export default (mobiledoc: Mobiledoc | Mobiledoc02x): Mobiledoc =>
+  matchesMinor(TARGET_VERSION)(mobiledoc.version)
+    ? (mobiledoc as Mobiledoc)
+    : upgradeMobiledoc02x(mobiledoc as Mobiledoc02x)

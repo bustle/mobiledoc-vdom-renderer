@@ -2,21 +2,23 @@ import Mobiledoc, * as MobiledocTypes from './types/Mobiledoc'
 import * as Renderer from './types/Renderer'
 import * as Vdom from './types/Vdom'
 import SectionRenderer from './SectionRenderer'
-import upgradeMobiledoc, { matchesMinorVersion } from './upgradeMobiledoc'
+import upgradeMobiledoc, { parseVersion } from './upgradeMobiledoc'
 import pipe from './pipe'
 import throwError from './throwError'
 
-/* Defines supported Mobiledoc versions for this renderer: */
+const SUPPORTED_MOBILEDOC_VERSION = '0.3.1'
 
-export const canParse = ({ version }: Mobiledoc): boolean =>
-  matchesMinorVersion('0.3')(version) ||
-  matchesMinorVersion('0.2')(version) ||
-  matchesMinorVersion('0.1')(version) ||
-  throwError(
-    `The passed Mobiledoc could not be parsed by \`MobiledocVdomRenderer\`.`
-  )
+/* Export the upgrader */
 
 export { upgradeMobiledoc }
+
+/* Define supported Mobiledoc versions for this renderer: */
+
+const currentVersion = parseVersion(SUPPORTED_MOBILEDOC_VERSION)
+export const canParse = (version: string) => {
+  const { major, minor } = parseVersion(version)
+  return major <= currentVersion.major && minor <= currentVersion.minor
+}
 
 /* Enforce Mobiledoc tag whitelist: */
 
