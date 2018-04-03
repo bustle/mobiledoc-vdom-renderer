@@ -3,7 +3,7 @@ import * as Vdom from '../../../types/Vdom'
 import * as Renderer from '../../../types/Renderer'
 import throwError from '../../../throwError'
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getCardComponent: Renderer.ComponentGetter
 }

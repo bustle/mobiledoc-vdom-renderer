@@ -5,7 +5,7 @@ import throwError from '../../throwError'
 
 const TAG_NAME = Mobiledoc.ImageSectionTagName.img
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getElement: Renderer.ComponentGetter
 }

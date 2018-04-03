@@ -3,12 +3,12 @@ import * as Vdom from '../../types/Vdom'
 import * as Renderer from '../../types/Renderer'
 import CardRenderer from './CardRenderer'
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getCardComponent: Renderer.ComponentGetter
 }
 
-interface Context {
+export interface Context {
   cards: Mobiledoc.Card[]
 }
 

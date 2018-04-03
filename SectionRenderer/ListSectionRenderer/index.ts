@@ -6,13 +6,13 @@ import MarkersRenderer from '../MarkersRenderer'
 
 const ITEM_TAG_NAME = Mobiledoc.ListItemTagName.li
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getElement: Renderer.ComponentGetter
   getAtomComponent: Renderer.ComponentGetter
 }
 
-interface Context {
+export interface Context {
   markups: Mobiledoc.Markup[]
   atoms: Mobiledoc.Atom[]
 }

@@ -65,13 +65,13 @@ const MarkerMarkupNodesCloser = ({
       )(nodes.slice(0, -closedMarkupCount))
     : nodes
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getAtomComponent: Renderer.ComponentGetter
   getElement: Renderer.ComponentGetter
 }
 
-interface Context {
+export interface Context {
   markups: Mobiledoc.Markup[]
   atoms: Mobiledoc.Atom[]
 }

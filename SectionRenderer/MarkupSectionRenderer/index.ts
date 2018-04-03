@@ -4,13 +4,13 @@ import * as Renderer from '../../types/Renderer'
 import throwError from '../../throwError'
 import MarkersRenderer from '../MarkersRenderer'
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getAtomComponent: Renderer.ComponentGetter
   getElement: Renderer.ComponentGetter
 }
 
-interface Context {
+export interface Context {
   markups: Mobiledoc.Markup[]
   atoms: Mobiledoc.Atom[]
 }

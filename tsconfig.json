@@ -3,7 +3,7 @@
     "target": "ES5",
     "module": "CommonJS",
     "outDir": "dist",
-    "declaration": false,
+    "declaration": true,
     "moduleResolution": "Node",
     "strict": true,
     "forceConsistentCasingInFileNames": true,

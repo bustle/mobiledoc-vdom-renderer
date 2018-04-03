@@ -11,6 +11,9 @@ const SUPPORTED_MOBILEDOC_VERSION = '0.3.1'
 /* Export the upgrader */
 
 export { upgradeMobiledoc }
+export { Mobiledoc, MobiledocTypes }
+
+/* Export Mobiledoc types */
 
 /* Define supported Mobiledoc versions for this renderer: */
 
@@ -42,7 +45,7 @@ export const getElementDefault: Renderer.ComponentGetter = (
 
 /* Our friendly renderer */
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getCardComponent: Renderer.ComponentGetter
   getAtomComponent: Renderer.ComponentGetter

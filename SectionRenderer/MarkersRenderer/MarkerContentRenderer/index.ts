@@ -3,12 +3,12 @@ import * as Vdom from '../../../types/Vdom'
 import * as Renderer from '../../../types/Renderer'
 import AtomRenderer from './AtomRenderer'
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getAtomComponent: Renderer.ComponentGetter
 }
 
-interface Context {
+export interface Context {
   atoms: Mobiledoc.Atom[]
 }
 

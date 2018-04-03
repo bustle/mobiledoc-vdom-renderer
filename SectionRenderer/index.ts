@@ -6,14 +6,14 @@ import ImageSectionRenderer from './ImageSectionRenderer'
 import ListSectionRenderer from './ListSectionRenderer'
 import CardSectionRenderer from './CardSectionRenderer'
 
-interface Options {
+export interface Options {
   createElement: Vdom.Renderer
   getCardComponent: Renderer.ComponentGetter
   getAtomComponent: Renderer.ComponentGetter
   getElement: Renderer.ComponentGetter
 }
 
-interface Context {
+export interface Context {
   markups: Mobiledoc.Markup[]
   cards: Mobiledoc.Card[]
   atoms: Mobiledoc.Atom[]

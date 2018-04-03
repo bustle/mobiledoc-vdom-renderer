@@ -4,6 +4,7 @@
   "description": "Render Mobiledoc as VDOM, for React or React-like `createElement` calls",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "lint": "tsc --pretty --noEmit; npm run lint:ts; npm run lint:js",
     "lint:ts": "tslint --config tslint.json --project tsconfig.json --exclude '**/*.js' --format stylish || true",
