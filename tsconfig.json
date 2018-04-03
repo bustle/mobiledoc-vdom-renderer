@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "declaration": false,
+    "moduleResolution": "Node",
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strict": true,
-    "target": "es5",
-    "module": "CommonJS",
-    "lib": ["ES2015"],
-    "moduleResolution": "Node",
-    "outDir": "dist",
-    "declaration": false
+    "lib": ["ES2015"]
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
