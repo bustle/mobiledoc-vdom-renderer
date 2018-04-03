@@ -1,6 +1,9 @@
 import Mobiledoc from '../../types/Mobiledoc'
 
-// TODO: actually just build this in each index.test.js from the examples in each renderer’s subtest
+/* TODO:
+  actually just build this mobiledoc in each index.test.js, from the examples in
+  each renderer’s subtests!
+*/
 
 export default {
   version: '0.3.1',

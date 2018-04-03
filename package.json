@@ -4,8 +4,10 @@
   "description": "Render Mobiledoc as VDOM, for React or React-like `createElement` calls",
   "main": "dist/index.js",
   "scripts": {
-    "lint": "tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude '**/*.js'; eslint . --ignore-path .gitignore",
-    "format": "eslint . --ignore-path .gitignore --fix",
+    "lint": "tsc --pretty --noEmit; npm run lint:ts; npm run lint:js",
+    "lint:ts": "tslint --config tslint.json --project tsconfig.json --exclude '**/*.js' --format stylish || true",
+    "lint:js": "eslint . --ext .ts .js --ignore-path .gitignore || true",
+    "format": "eslint . --ext .ts .js --ignore-path .gitignore --fix",
     "test:js": "nyc --require ts-node/register ava",
     "test": "npm run lint && npm run test:js",
     "snapshot": "ava --update-snapshots",

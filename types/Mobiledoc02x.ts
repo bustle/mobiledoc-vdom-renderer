@@ -29,7 +29,11 @@ export interface CardSection extends Array<any> {
   2: object
 }
 
-export type Section = MarkupSection | ListSection | CardSection | MobiledocTypes.ImageSection
+export type Section =
+  | MarkupSection
+  | ListSection
+  | CardSection
+  | MobiledocTypes.ImageSection
 
 export interface MarkupsAndSections extends Array<any> {
   0: MobiledocTypes.Markup[]
