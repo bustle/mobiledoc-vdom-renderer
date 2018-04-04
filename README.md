@@ -1,14 +1,20 @@
 # mobiledoc-vdom-renderer
 
-This library traverses [Mobiledoc](https://github.com/bustle/mobiledoc-kit) documents and passes them to your supplied `createElement` function. (This is also often called `h` for [hyperscript](https://github.com/hyperhype/hyperscript) or, with JSX, is your _pragma_.) These functions return virtual DOM, so you can embed mobiledocs “natively” in a framework like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp), or simply render mobiledocs directly to DOM with a micro-renderer such as [picodom](https://github.com/JorgeBucaran/picodom).
+This package renders [Mobiledoc documents](https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md) through calls to a `createElement` function, often referred to as `h`, for _[hyperscript](https://github.com/hyperhype/hyperscript)_ or provided as a global if you are using [JSX](https://facebook.github.io/jsx/). This allows embedding Mobiledoc content “natively” as _virtual DOM_ in frameworks like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp).
 
-Alternatively, you could use this library to convert your mobiledocs to an arbitrary AST by adopting `createElement`’s standard `(nodeType, props, ...children)` signature as your transformer.
+Alternatively, you can skip the “virtual” step and build DOM directly with a micro-renderer such as [ultradom](https://github.com/JorgeBucaran/ultradom), or even convert _mobiledocs_ to arbitrary ASTs by adopting `createElement`’s standard `(nodeType: string | Component, props: {}, ...children: Node[]) => Node` signature for your builder.
 
 ## Installation
 
-`npm install @bustle/mobiledoc-vdom-renderer --save`  
-or  
-`yarn add @bustle/mobiledoc-vdom-renderer`
+```shell
+npm install @bustle/mobiledoc-vdom-renderer --save
+```
+
+or
+
+```shell
+yarn add @bustle/mobiledoc-vdom-renderer
+```
 
 ## Usage
 
@@ -16,58 +22,136 @@ or
 /* @jsx h */
 import Renderer from '@bustle/mobiledoc-vdom-renderer'
 
-// render: Mobiledoc => VNode[]
+// render: (mobiledoc: Mobiledoc) => Node[]
 const render = Renderer({ createElement: h })
 
-// Instant <Mobiledoc/> component
+// Instant <Mobiledoc/> Component
 export default function Mobiledoc({ mobiledoc }) {
   return <div>{render(mobiledoc)}</div>
 }
 ```
 
-# API
+## API
 
 ```javascript
-import Renderer, { upgradeMobiledoc } from '@bustle/mobiledoc-vdom-renderer'
+import Renderer, {
+  upgradeMobiledoc,
+  getElementDefault
+} from '@bustle/mobiledoc-vdom-renderer'
 ```
 
-### `Renderer(options)` _(default)_
+### `Renderer` _(default export)_
 
-`(options: Options = { getElementDefault }) => Renderer`
-The library’s default export takes an `options` object, and returns a **render** function with the signature `(mobiledoc: Mobiledoc) => VNode[]`.
+```typescript
+Renderer: (options: RendererOptions) => RenderFunction
+```
 
-#### Options:
+Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the supplied options
 
-* `createElement` `(el: string | Component, props?: object, ...children: Node[]) => VNode` _required_
-
-* `getCardComponent` `(type: string) => string | ({ payload }) => VNode` Getter which receives a card type and returns a function to receive its props `{ payload }` (required if your mobiledoc contains cards)
-
-* `getAtomComponent` `(type: string) => string | ({ payload }) => VNode` Getter which receives an atom type and returns a function to receive its props `{ payload, children }` (required if your mobiledoc contains atoms)
-
-* `getElement` `(tagName: string) => string | (attributes: {}) => VNode` Getter which receives a tag name and may return a new tag name in order to override any markup in the mobiledoc (for instance, to map your `'h1'`s to `'h2'`s); alternatively, return a function (such as a component) which will receive the markup’s attributes as its props
-
-  `getElement`’s default value is exported as `getElementDefault`, which `throw`s on any tag names which are not on Mobiledoc’s [whitelists](types/Mobiledoc.ts). It is exported so you may use it as a fallback within your own `getElement`; however, simply overriding `getElement` with a `tagName => tagName` identity function allows rendering mobiledocs which contain arbitrary tags.
+* #### `options` _required_
+  ```typescript
+  {
+    createElement: CreateElement,
+    getCardComponent?: ComponentGetter,
+    getAtomComponent?: ComponentGetter,
+    getElement?: ComponentGetter = getElementDefault
+  }
+  ```
+  * ##### `createElement` _required_
+    ```typescript
+    createElement: (
+      type: string | Component,
+      props?: object,
+      ...children: Node[]
+    ) => Node
+    ```
+    Any compatible function such as `React.createElement` or hyperscript `h`
+  * #### `getCardComponent`
+    ```typescript
+    getCardComponent: (type: string) => string | Component
+    ```
+    Function which returns a string (_tag name_) or _component_ (`(props: { payload: object }) => Node`) for the given _card type_ (required if rendering a mobiledoc with cards)
+  * #### `getAtomComponent`
+    ```typescript
+    getAtomComponent: (type: string) => string | Component
+    ```
+    Function which returns a string (_tag name_) or _component_ (`(props: { payload: object }) => Node`) for the given _atom type_ (required if rendering a mobiledoc with atoms)
+  * #### `getElement`
+    ```typescript
+    getElement: (tagName: string) => string | Component = getElementDefault
+    ```
+    Function which returns a string (_tag name_) or _component_ (`(attributes: object) => Node`) to override rendering for the given tag name (for instance, to map your `'h1'`s to `'h2'`s or instead render a custom heading component)
 
 ### `upgradeMobiledoc`
 
-`(mobiledoc: Mobiledoc) => Mobiledoc`
+```typescript
+upgradeMobiledoc: (mobiledoc: Mobiledoc | Mobiledoc02x) => Mobiledoc
+```
 
-Upgrades mobiledocs from earlier versions to the current (`0.3.1`) format.
+Upgrades a mobiledoc from any released version to the latest specification (`0.3.1`)
+
+### `getElementDefault`
+
+```typescript
+getElementDefault: (tagName: string) => string
+```
+
+`getElement`’s default value is exported as `getElementDefault`, which throws an error on any tag names which are not in [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/Mobiledoc.ts); passing through the tag name instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
+
+## Type declarations
+
+```typescript
+import { Mobiledoc } from '@bustle/mobiledoc-vdom-renderer'
+```
+
+```typescript
+import Mobiledoc, * as MobiledocTypes from '@bustle/mobiledoc-vdom-renderer/types/mobiledoc'
+```
+
+This package includes [complete Typescript declarations describing the Mobiledoc format](./types/mobiledoc.ts), which may be imported directly for use with any mobiledoc-related code.
 
 ## Contributing
 
-Contributions are welcome! This library is written in [Typescript](http://www.typescriptlang.org/) in a pure functional style. Many best practices are strictly enforced by code linting; using an editor that supports both type-checking and linting while-you-type is recommended.
+Contributions—including pull requests, bug reports, documentation, and suggestions—are welcome!
 
-To get started, clone this repository and run `npm install`.
+The code is written in [the Javascript superset _Typescript_](http://www.typescriptlang.org/) in a pure functional style. Opinionated “best practices,” including functional programming, are strictly enforced by linters—it’ll help to use a code editor which supports both as-you-type linting and type-checking.
 
 ### Test-driven development
 
-`npm start` will watch for changes, then lint and test each file you touch. (Watching is provided by [`chokidar-cli`](https://github.com/kimmobrunfeldt/chokidar-cli).)
+* #### Installation
 
-### Other useful commands
+```shell
+git clone https://github.com/bustle/mobiledoc-vdom-renderer.git
+cd mobiledoc-vdom-renderer/
+npm install
+```
 
-* `npm test`: Run all tests once (with [`ava`](https://github.com/avajs/ava)) and generate a coverage report with [`nyc`](https://github.com/istanbuljs/nyc)
-* `npm run format`: Fixes all automatically-fixable linting errors; in particular, applies [`prettier`](https://github.com/prettier/prettier) via [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) which reformats code by convention
-* `npm run lint`: Executes Typescript type-checking; [`tslint`](https://github.com/palantir/tslint) and [`eslint`](https://github.com/eslint/eslint) enforce [Standard style](https://standardjs.com/) and some functional programming best practices
-* `npm run snapshot`: This project uses [snapshot testing](https://github.com/avajs/ava#snapshot-testing) to compare observed output to expected output. This command updates all snapshots, so check your diff before committing and make sure any changes look right!
-* `npm run build`: Builds the library to the `dist/` to prepare for release
+* #### `npm start`
+
+  Watches the filesystem for changes ([chokidar-cli](https://github.com/kimmobrunfeldt/chokidar-cli)) then lints (Typescript, [Standard style](https://standardjs.com/), [functional JS practices](https://github.com/jfmengels/eslint-plugin-fp)) and tests ([ava snapshots](https://github.com/avajs/ava#snapshot-testing)) each file you touch
+
+* #### Other useful commands
+  * ##### `npm test`
+    Run the linters and all tests and generate a coverage report ([nyc](https://github.com/istanbuljs/nyc))
+  * ##### `npm run snapshot`
+    Updates all snapshots; check your `git` diff before committing!
+  * ##### `npm run format`
+    Fixes many linting errors and applies [prettier whitespace conventions](https://github.com/prettier/prettier)
+
+## More for Mobiledoc
+
+### Renderers
+
+* [mobiledoc-react-renderer](https://github.com/dailybeast/mobiledoc-react-renderer)
+* [mobiledoc-dom-renderer](https://github.com/bustle/mobiledoc-dom-renderer)
+* [mobiledoc-text-renderer](https://github.com/bustle/mobiledoc-text-renderer)
+
+### Editors
+
+* [react-mobiledoc-editor](https://github.com/joshfrench/react-mobiledoc-editor)
+* [ember-mobiledoc-editor](https://github.com/bustle/ember-mobiledoc-editor)
+* [vue-mobiledoc-editor](https://github.com/alidcastano/vue-mobiledoc-editor)
+
+### Utilities
+
+* [mobiledoc-kit](https://github.com/bustle/mobiledoc-kit) editor toolkit
