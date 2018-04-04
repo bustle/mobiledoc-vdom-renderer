@@ -9,7 +9,7 @@
     "lint": "tsc --pretty --noEmit; npm run lint:ts; npm run lint:js",
     "lint:ts": "tslint --config tslint.json --project tsconfig.json --exclude '**/*.js' --format stylish || true",
     "lint:js": "eslint . --ext .ts .js --ignore-path .gitignore || true",
-    "format": "eslint . --ext .ts .js --ignore-path .gitignore --fix",
+    "format": "eslint . --ext .ts .js --ignore-path .gitignore --fix && prettier '**/*.md' --write",
     "test:js": "nyc --require ts-node/register ava",
     "test": "npm run lint && npm run test:js",
     "snapshot": "ava --update-snapshots",

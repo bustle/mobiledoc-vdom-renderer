@@ -1,6 +1,6 @@
 # mobiledoc-vdom-renderer
 
-This library traverses [Mobiledoc](https://github.com/bustle/mobiledoc-kit) documents and passes them to your supplied `createElement` function. (This is also often called `h` for [hyperscript](https://github.com/hyperhype/hyperscript) or, with JSX, is your _pragma_.) These functions return virtual DOM, so you can embed mobiledocs “natively” in a framework like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp), or simply render mobiledocs directly to DOM  with a micro-renderer such as [ultradom](https://github.com/JorgeBucaran/ultradom).
+This library traverses [Mobiledoc](https://github.com/bustle/mobiledoc-kit) documents and passes them to your supplied `createElement` function. (This is also often called `h` for [hyperscript](https://github.com/hyperhype/hyperscript) or, with JSX, is your _pragma_.) These functions return virtual DOM, so you can embed mobiledocs “natively” in a framework like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp), or simply render mobiledocs directly to DOM with a micro-renderer such as [picodom](https://github.com/JorgeBucaran/picodom).
 
 Alternatively, you could use this library to convert your mobiledocs to an arbitrary AST by adopting `createElement`’s standard `(nodeType, props, ...children)` signature as your transformer.
 
@@ -11,6 +11,7 @@ or
 `yarn add @bustle/mobiledoc-vdom-renderer`
 
 ## Usage
+
 ```jsx
 /* @jsx h */
 import Renderer from '@bustle/mobiledoc-vdom-renderer'
@@ -19,7 +20,7 @@ import Renderer from '@bustle/mobiledoc-vdom-renderer'
 const render = Renderer({ createElement: h })
 
 // Instant <Mobiledoc/> component
-export default function Mobiledoc ({ mobiledoc }) {
+export default function Mobiledoc({ mobiledoc }) {
   return <div>{render(mobiledoc)}</div>
 }
 ```
@@ -33,12 +34,11 @@ import Renderer, { upgradeMobiledoc } from '@bustle/mobiledoc-vdom-renderer'
 ### `Renderer(options)` _(default)_
 
 `(options: Options = { getElementDefault }) => Renderer`
-  The library’s default export takes an `options` object, and returns a **render** function with the signature `(mobiledoc: Mobiledoc) => VNode[]`.
+The library’s default export takes an `options` object, and returns a **render** function with the signature `(mobiledoc: Mobiledoc) => VNode[]`.
 
 #### Options:
 
-* `createElement` `(el: string | Component, props?: object,
-...children: Node[]) => VNode` _required_
+* `createElement` `(el: string | Component, props?: object, ...children: Node[]) => VNode` _required_
 
 * `getCardComponent` `(type: string) => string | ({ payload }) => VNode` Getter which receives a card type and returns a function to receive its props `{ payload }` (required if your mobiledoc contains cards)
 
@@ -61,9 +61,11 @@ Contributions are welcome! This library is written in [Typescript](http://www.ty
 To get started, clone this repository and run `npm install`.
 
 ### Test-driven development
+
 `npm start` will watch for changes, then lint and test each file you touch. (Watching is provided by [`chokidar-cli`](https://github.com/kimmobrunfeldt/chokidar-cli).)
 
 ### Other useful commands
+
 * `npm test`: Run all tests once (with [`ava`](https://github.com/avajs/ava)) and generate a coverage report with [`nyc`](https://github.com/istanbuljs/nyc)
 * `npm run format`: Fixes all automatically-fixable linting errors; in particular, applies [`prettier`](https://github.com/prettier/prettier) via [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier) which reformats code by convention
 * `npm run lint`: Executes Typescript type-checking; [`tslint`](https://github.com/palantir/tslint) and [`eslint`](https://github.com/eslint/eslint) enforce [Standard style](https://standardjs.com/) and some functional programming best practices
