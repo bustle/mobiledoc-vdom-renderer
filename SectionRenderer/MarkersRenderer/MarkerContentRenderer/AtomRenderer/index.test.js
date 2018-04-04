@@ -8,7 +8,7 @@ testRenderPipelines(({ name, createElement, renderHtml }) => {
   const renderVdom = AtomRenderer({
     createElement,
     getAtomComponent: type =>
-      name === 'picodom'
+      name === 'ultradom'
         ? ({ payload }, children) =>
             createElement(type, { attribute: payload.attribute }, children)
         : ({ payload, children }) =>

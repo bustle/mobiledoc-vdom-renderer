@@ -1,6 +1,6 @@
 # mobiledoc-vdom-renderer
 
-This library traverses [Mobiledoc](https://github.com/bustle/mobiledoc-kit) documents and passes them to your supplied `createElement` function. (This is also often called `h` for [hyperscript](https://github.com/hyperhype/hyperscript) or, with JSX, is your _pragma_.) These functions return virtual DOM, so you can embed mobiledocs “natively” in a framework like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp), or simply render mobiledocs directly to DOM  with a micro-renderer such as [picodom](https://github.com/JorgeBucaran/picodom).
+This library traverses [Mobiledoc](https://github.com/bustle/mobiledoc-kit) documents and passes them to your supplied `createElement` function. (This is also often called `h` for [hyperscript](https://github.com/hyperhype/hyperscript) or, with JSX, is your _pragma_.) These functions return virtual DOM, so you can embed mobiledocs “natively” in a framework like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp), or simply render mobiledocs directly to DOM  with a micro-renderer such as [ultradom](https://github.com/JorgeBucaran/ultradom).
 
 Alternatively, you could use this library to convert your mobiledocs to an arbitrary AST by adopting `createElement`’s standard `(nodeType, props, ...children)` signature as your transformer.
 

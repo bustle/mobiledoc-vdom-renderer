@@ -1,22 +1,21 @@
 import { JSDOM } from 'jsdom'
-import { h as picodomCreateElement, patch as picodomMount } from 'picodom'
+import { h as ultradomCreateElement, patch as ultradomMount } from 'ultradom'
 import { h as preactCreateElement } from 'preact'
 import preactRender from 'preact-render-to-string'
 import { createElement as reactCreateElement } from 'react'
 import { renderToString as reactRender } from 'react-dom/server'
 
-global.document = new JSDOM(`<html><body></body></html>`).window.document // eslint-disable-line fp/no-mutation
-
-const picodomRender = vdom => {
-  picodomMount(undefined, vdom, document.body)
+const ultradomRender = vdom => {
+  global.document = new JSDOM(`<html><body></body></html>`).window.document // eslint-disable-line fp/no-mutation
+  document.body.appendChild(ultradomMount(vdom))
   return document.body.innerHTML
 }
 
 const pipelines = [
   {
-    name: 'picodom',
-    createElement: picodomCreateElement,
-    renderHtml: nodes => picodomRender(picodomCreateElement('root', {}, nodes)) // picodom requires a root node
+    name: 'ultradom',
+    createElement: ultradomCreateElement,
+    renderHtml: nodes => ultradomRender(nodes)
   },
   {
     name: 'preact',
