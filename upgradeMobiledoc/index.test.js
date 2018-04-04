@@ -12,4 +12,15 @@ const mobiledoc02x = {
   ]
 }
 
-test(t => t.snapshot(upgradeMobiledoc(mobiledoc02x)))
+const mobiledoc03x = {
+  version: '0.3.1',
+  sections: [],
+  markups: [],
+  cards: [],
+  atoms: []
+}
+
+test(t => {
+  t.snapshot(upgradeMobiledoc(mobiledoc02x))
+  t.snapshot(upgradeMobiledoc(mobiledoc03x))
+})

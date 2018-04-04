@@ -16,3 +16,8 @@ testRenderPipelines(({ name, createElement, renderHtml }) => {
   test(`${name}: renders a basic mobiledoc`, t =>
     t.snapshot(renderHtml(renderVdom(mobiledoc))))
 })
+
+test(`Throws on an unsupported Mobiledoc`, t => {
+  const renderer = MobiledocVdomRenderer({ createElement: () => {} })
+  t.throws(() => renderer({ version: '0.2.1' }))
+})

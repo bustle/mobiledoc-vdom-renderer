@@ -2,27 +2,19 @@ import Mobiledoc, * as MobiledocTypes from './types/Mobiledoc'
 import * as Renderer from './types/Renderer'
 import * as Vdom from './types/Vdom'
 import SectionRenderer from './SectionRenderer'
-import upgradeMobiledoc, { parseVersion } from './upgradeMobiledoc'
-import { includedIn, objectValues, throwError, pipe } from './utils'
+import upgradeMobiledoc from './upgradeMobiledoc'
+import {
+  includedIn,
+  objectValues,
+  throwError,
+  semverMatchesMinor
+} from './utils'
 
-const SUPPORTED_MOBILEDOC_VERSION = '0.3.1'
+export { upgradeMobiledoc, Mobiledoc, MobiledocTypes }
 
-/* Export the upgrader */
+export const SUPPORTED_MOBILEDOC_VERSION = '0.3.1'
 
-export { upgradeMobiledoc }
-export { Mobiledoc, MobiledocTypes }
-
-/* Export Mobiledoc types */
-
-/* Define supported Mobiledoc versions for this renderer: */
-
-const currentVersion = parseVersion(SUPPORTED_MOBILEDOC_VERSION)
-export const canParse = (version: string) => {
-  const { major, minor } = parseVersion(version)
-  return major <= currentVersion.major && minor <= currentVersion.minor
-}
-
-/* Enforce Mobiledoc tag whitelist: */
+export const canParse = semverMatchesMinor(SUPPORTED_MOBILEDOC_VERSION)
 
 const isValidElement: (tagName: string) => boolean = includedIn(
   objectValues({
@@ -64,11 +56,9 @@ export default ({
       `You must pass a \`getAtomComponent\` (\`type => Component\`) function to \`MobiledocVdomRenderer\` in order to render atoms (i.e. \`'${type}'\`).`
     ),
   getElement = getElementDefault
-}: Options) =>
-  pipe([
-    upgradeMobiledoc,
-    (mobiledoc: Mobiledoc) =>
-      mobiledoc.sections.map(
+}: Options) => (mobiledoc: Mobiledoc): Vdom.Node[] =>
+  canParse(mobiledoc.version)
+    ? mobiledoc.sections.map(
         SectionRenderer({
           createElement,
           getCardComponent,
@@ -80,4 +70,8 @@ export default ({
           atoms: mobiledoc.atoms
         })
       )
-  ])
+    : throwError(
+        `Unable to parse the passed Mobiledoc version \`'${
+          mobiledoc.version
+        }'\`.`
+      )

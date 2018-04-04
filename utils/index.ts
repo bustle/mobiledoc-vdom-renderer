@@ -3,4 +3,5 @@
 export { default as includedIn } from './includedIn'
 export { default as objectValues } from './objectValues'
 export { default as pipe } from './pipe'
+export { default as semverMatchesMinor } from './semverMatchesMinor'
 export { default as throwError } from './throwError'
