@@ -1,6 +1,6 @@
 import Mobiledoc, * as MobiledocTypes from '../../types/Mobiledoc'
 import Mobiledoc02x, * as Mobiledoc02xTypes from '../../types/Mobiledoc02x'
-import pipe from '../../pipe'
+import { pipe } from '../../utils'
 
 const TARGET_VERSION = '0.3.1'
 

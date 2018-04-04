@@ -1,7 +1,7 @@
 import * as Mobiledoc from '../../../../types/Mobiledoc'
 import * as Vdom from '../../../../types/Vdom'
 import * as Renderer from '../../../../types/Renderer'
-import throwError from '../../../../throwError'
+import { throwError } from '../../../../utils'
 
 export interface Options {
   createElement: Vdom.Renderer

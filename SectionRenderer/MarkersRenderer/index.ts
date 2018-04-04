@@ -1,4 +1,4 @@
-import pipe from '../../pipe'
+import { pipe } from '../../utils'
 import * as Mobiledoc from '../../types/Mobiledoc'
 import * as Vdom from '../../types/Vdom'
 import * as Renderer from '../../types/Renderer'
