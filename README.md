@@ -7,20 +7,20 @@ Alternatively, you can skip the “virtual” step and build DOM directly with a
 ## Installation
 
 ```shell
-npm install @bustle/mobiledoc-vdom-renderer --save
+npm install mobiledoc-vdom-renderer --save
 ```
 
 or
 
 ```shell
-yarn add @bustle/mobiledoc-vdom-renderer
+yarn add mobiledoc-vdom-renderer
 ```
 
 ## Usage
 
 ```jsx
 /* @jsx h */
-import Renderer from '@bustle/mobiledoc-vdom-renderer'
+import Renderer from 'mobiledoc-vdom-renderer'
 
 // render: (mobiledoc: Mobiledoc) => Node[]
 const render = Renderer({ createElement: h })
@@ -37,7 +37,7 @@ export default function Mobiledoc({ mobiledoc }) {
 import Renderer, {
   upgradeMobiledoc,
   getElementDefault
-} from '@bustle/mobiledoc-vdom-renderer'
+} from 'mobiledoc-vdom-renderer'
 ```
 
 ### `Renderer` _(default export)_
@@ -101,11 +101,11 @@ getElementDefault: (tagName: string) => string
 ## Type definitions
 
 ```typescript
-import { Mobiledoc } from '@bustle/mobiledoc-vdom-renderer'
+import { Mobiledoc } from 'mobiledoc-vdom-renderer'
 ```
 
 ```typescript
-import Mobiledoc, * as MobiledocTypes from '@bustle/mobiledoc-vdom-renderer/types/mobiledoc'
+import Mobiledoc, * as MobiledocTypes from 'mobiledoc-vdom-renderer/types/mobiledoc'
 ```
 
 This package includes [complete Typescript definitions describing the Mobiledoc format](./types/Mobiledoc/index.ts), which may be imported directly for use with any mobiledoc-related code.
