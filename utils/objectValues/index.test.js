@@ -1,6 +1,6 @@
 import test from 'ava'
 import objectValues from '.'
 
-test(t => {
+test('returns an object’s values', t => {
   t.snapshot(objectValues({ name: 'circle', color: null, hasCorners: false }))
 })
