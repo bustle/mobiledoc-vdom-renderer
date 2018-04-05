@@ -1,8 +1,8 @@
 # mobiledoc-vdom-renderer
 
-This package renders [Mobiledoc documents](https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md) through calls to a `createElement` function, often referred to as `h`, for _[hyperscript](https://github.com/hyperhype/hyperscript)_ or provided as a global if you are using [JSX](https://facebook.github.io/jsx/). This allows embedding Mobiledoc content “natively” as _virtual DOM_ in frameworks like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp).
+This package renders [Mobiledoc documents](https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md) through calls to a `createElement` function, often referred to as `h` (for _[hyperscript](https://github.com/hyperhype/hyperscript)_) or provided as a global if you are using [JSX](https://facebook.github.io/jsx/). This allows embedding Mobiledoc content “natively” as _virtual DOM_ in frameworks like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp).
 
-Alternatively, you can skip the “virtual” step and build DOM directly with a micro-renderer such as [ultradom](https://github.com/JorgeBucaran/ultradom), or even convert _mobiledocs_ to arbitrary ASTs by adopting `createElement`’s standard `(type: (properties: object) => Node, properties: object, ...children: Node[]) => Node` signature for your builder.
+Alternatively, you can skip the “virtual” step and build DOM directly with a micro-renderer such as [ultradom](https://github.com/JorgeBucaran/ultradom) or even convert _mobiledocs_ to arbitrary ASTs by adopting `createElement`’s standard `(type: (properties: object) => Node, properties: object, ...children: Node[]) => Node` signature for your builder.
 
 ## Installation
 
@@ -34,10 +34,7 @@ export default function Mobiledoc({ mobiledoc }) {
 ## API
 
 ```javascript
-import Renderer, {
-  upgradeMobiledoc,
-  getElementDefault
-} from 'mobiledoc-vdom-renderer'
+import Renderer, { upgradeMobiledoc } from 'mobiledoc-vdom-renderer'
 ```
 
 ### `Renderer` _(default export)_
@@ -60,7 +57,7 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
   * ##### `createElement` _required_
     ```typescript
     createElement: (
-      type: ElementType,
+      type: string | Component,
       properties?: object,
       ...children: Node[]
     ) => Node
@@ -80,7 +77,11 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
     ```typescript
     getElement: (tagName: string) => string | Component = getElementDefault
     ```
-    Function which returns a string (_tag name_) or _component_ (`(attributes: object) => Node`) to override rendering for the given tag name (for instance, to map your `'h1'`s to `'h2'`s or instead render a custom heading component)
+    Function which returns a string (_tag name_) or _component_ (`(attributes: object) => Node`) to override rendering for the given tag name (for instance, to mix in HTML attributes or render a custom component instead)
+    ```typescript
+    import { getElementDefault } from 'mobiledoc-vdom-renderer'
+    ```
+    `getElement`’s default behavior is exported as `getElementDefault`, which passes through valid tag names but throws an error for tags not on [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/ts); passing through all tag names instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
 
 ### `upgradeMobiledoc`
 
@@ -89,14 +90,6 @@ upgradeMobiledoc: (mobiledoc: Mobiledoc | Mobiledoc02x) => Mobiledoc
 ```
 
 Upgrades a mobiledoc from any released version to the latest specification (`0.3.1`)
-
-### `getElementDefault`
-
-```typescript
-getElementDefault: (tagName: string) => string
-```
-
-`getElement`’s default value is exported as `getElementDefault`, which throws an error on any tag names which are not in [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/ts); passing through the tag name instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
 
 ## Type definitions
 
@@ -114,7 +107,7 @@ This package includes [complete Typescript definitions describing the Mobiledoc 
 
 Contributions—including pull requests, bug reports, documentation, and suggestions—are welcome!
 
-The code is written in [the Javascript superset _Typescript_](http://www.typescriptlang.org/) in a pure functional style. Opinionated “best practices,” including functional programming, are strictly enforced by linters—it’ll help to use a code editor which supports both as-you-type linting and type-checking.
+The code is written in [Typescript](http://www.typescriptlang.org/) in a pure functional style. Opinionated “best practices,” including functional programming, are strictly enforced by linters—it’ll help to use a code editor which supports both as-you-type linting and type-checking.
 
 ### Test-driven development
 
