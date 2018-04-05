@@ -1,5 +1,7 @@
 # mobiledoc-vdom-renderer
 
+[![Build Status](https://travis-ci.org/bustle/mobiledoc-vdom-renderer.svg?branch=master)](https://travis-ci.org/bustle/mobiledoc-vdom-renderer)
+
 This package renders [Mobiledoc documents](https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md) through calls to a `createElement` function, often referred to as `h` (for _[hyperscript](https://github.com/hyperhype/hyperscript)_) or provided as a global if you are using [JSX](https://facebook.github.io/jsx/). This allows embedding Mobiledoc content “natively” as _virtual DOM_ in frameworks like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp).
 
 Alternatively, you can skip the “virtual” step and build DOM directly with a micro-renderer such as [ultradom](https://github.com/JorgeBucaran/ultradom) or even convert _mobiledocs_ to arbitrary ASTs by adopting `createElement`’s standard `(type: (properties: object) => Node, properties: object, ...children: Node[]) => Node` signature for your builder.
