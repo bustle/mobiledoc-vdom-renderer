@@ -66,17 +66,17 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
     ) => Node
     ```
     Any compatible function such as `React.createElement` or hyperscript `h`
-  * #### `getCardComponent`
+  * ##### `getCardComponent`
     ```typescript
     getCardComponent: (type: string) => string | Component
     ```
     Function which returns a string (_tag name_) or _component_ (`(properties: { payload: object }) => Node`) for the given _card type_ (required if rendering a mobiledoc with cards)
-  * #### `getAtomComponent`
+  * ##### `getAtomComponent`
     ```typescript
     getAtomComponent: (type: string) => string | Component
     ```
     Function which returns a string (_tag name_) or _component_ (`(properties: { payload: object }) => Node`) for the given _atom type_ (required if rendering a mobiledoc with atoms)
-  * #### `getElement`
+  * ##### `getElement`
     ```typescript
     getElement: (tagName: string) => string | Component = getElementDefault
     ```
