@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "lts/*"
+install:
+- npm i -g npm@5.8
+- npm ci
+cache:
+  directories:
+  - "$HOME/.npm"
