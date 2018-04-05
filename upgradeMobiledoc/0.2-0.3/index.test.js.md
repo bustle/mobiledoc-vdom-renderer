@@ -1,4 +1,4 @@
-# Snapshot report for `upgradeMobiledoc/0.2.x-0.3.x/index.test.js`
+# Snapshot report for `upgradeMobiledoc/0.2-0.3/index.test.js`
 
 The actual snapshot is saved in `index.test.js.snap`.
 

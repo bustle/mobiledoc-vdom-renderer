@@ -2,6 +2,10 @@ import test from 'ava'
 import throwError from '.'
 
 test(t => {
-  const message = 'This test should throw this error.'
-  t.throws(() => throwError(message), `MobiledocVdomRenderer: ${message}`)
+  const message = 'An error was encountered'
+  try {
+    throwError(message)
+  } catch (error) {
+    t.snapshot(error.message)
+  }
 })

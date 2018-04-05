@@ -1,7 +1,7 @@
 import test from 'ava'
 import testRenderPipelines from './test/helpers/testRenderPipelines'
 import mobiledoc from './test/mobiledoc'
-import MobiledocVdomRenderer from '.'
+import MobiledocVdomRenderer, { canParse } from '.'
 
 const getAtomComponent = type => type
 const getCardComponent = type => type
@@ -17,7 +17,15 @@ testRenderPipelines(({ name, createElement, renderHtml }) => {
     t.snapshot(renderHtml(renderVdom(mobiledoc))))
 })
 
-test(`Throws on an unsupported Mobiledoc`, t => {
+test(`Does not try to parse unsupported mobiledocs`, t => {
+  t.snapshot(canParse('0.2.1'))
+
+  t.snapshot(canParse('0.3.0'))
+
   const renderer = MobiledocVdomRenderer({ createElement: () => {} })
-  t.throws(() => renderer({ version: '0.2.1' }))
+  try {
+    renderer({ version: '0.2.1' })
+  } catch (error) {
+    t.snapshot(error.message)
+  }
 })
