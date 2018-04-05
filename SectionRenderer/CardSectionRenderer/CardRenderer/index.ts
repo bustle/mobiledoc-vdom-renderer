@@ -1,17 +1,16 @@
-import * as Mobiledoc from '../../../types/Mobiledoc'
-import * as Vdom from '../../../types/Vdom'
-import * as Renderer from '../../../types/Renderer'
+import { CreateElement, ElementTypeGetter, Node } from '../../../types'
+import { Card } from '../../../types/Mobiledoc'
 import { throwError } from '../../../utils'
 
 export interface Options {
-  createElement: Vdom.Renderer
-  getCardComponent: Renderer.ComponentGetter
+  createElement: CreateElement
+  getCardComponent: ElementTypeGetter
 }
 
 export default ({ createElement, getCardComponent }: Options) => ([
   type,
   payload
-]: Mobiledoc.Card): Vdom.Node =>
+]: Card): Node =>
   createElement(
     getCardComponent(type) ||
       throwError(

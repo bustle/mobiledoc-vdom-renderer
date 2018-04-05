@@ -1,26 +1,25 @@
-import * as Mobiledoc from '../../../types/Mobiledoc'
-import * as Vdom from '../../../types/Vdom'
-import * as Renderer from '../../../types/Renderer'
+import { CreateElement, ElementTypeGetter, Node } from '../../../types'
+import { Atom, Marker, MarkerTypeIdentifier } from '../../../types/Mobiledoc'
 import AtomRenderer from './AtomRenderer'
 
 export interface Options {
-  createElement: Vdom.Renderer
-  getAtomComponent: Renderer.ComponentGetter
+  createElement: CreateElement
+  getAtomComponent: ElementTypeGetter
 }
 
 export interface Context {
-  atoms: Mobiledoc.Atom[]
+  atoms: Atom[]
 }
 
 interface RendererDictionary {
-  [type: number]: (value: string | number) => Vdom.Node
+  [type: number]: (value: string | number) => Node
 }
 
 export default ({ createElement, getAtomComponent }: Options) => ({
   atoms
-}: Context) => ([typeIdentifier, , , value]: Mobiledoc.Marker): Vdom.Node =>
+}: Context) => ([typeIdentifier, , , value]: Marker): Node =>
   (({
-    [Mobiledoc.MarkerTypeIdentifier.TEXT]: (text: string) => text,
-    [Mobiledoc.MarkerTypeIdentifier.ATOM]: (index: number) =>
+    [MarkerTypeIdentifier.TEXT]: (text: string) => text,
+    [MarkerTypeIdentifier.ATOM]: (index: number) =>
       AtomRenderer({ createElement, getAtomComponent })(atoms[index])
   } as RendererDictionary)[typeIdentifier](value))

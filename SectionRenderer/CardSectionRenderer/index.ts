@@ -1,18 +1,17 @@
-import * as Mobiledoc from '../../types/Mobiledoc'
-import * as Vdom from '../../types/Vdom'
-import * as Renderer from '../../types/Renderer'
+import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import { Card, CardSection } from '../../types/Mobiledoc'
 import CardRenderer from './CardRenderer'
 
 export interface Options {
-  createElement: Vdom.Renderer
-  getCardComponent: Renderer.ComponentGetter
+  createElement: CreateElement
+  getCardComponent: ElementTypeGetter
 }
 
 export interface Context {
-  cards: Mobiledoc.Card[]
+  cards: Card[]
 }
 
 export default ({ createElement, getCardComponent }: Options) => ({
   cards
-}: Context) => ([, index]: Mobiledoc.CardSection): Vdom.Node =>
+}: Context) => ([, index]: CardSection): Node =>
   CardRenderer({ createElement, getCardComponent })(cards[index])

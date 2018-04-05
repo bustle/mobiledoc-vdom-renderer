@@ -1,26 +1,31 @@
-import * as Mobiledoc from '../types/Mobiledoc'
-import * as Vdom from '../types/Vdom'
-import * as Renderer from '../types/Renderer'
+import { CreateElement, ElementTypeGetter, Node } from '../types'
+import {
+  Markup,
+  Card,
+  Atom,
+  Section,
+  SectionTypeIdentifier
+} from '../types/Mobiledoc'
 import MarkupSectionRenderer from './MarkupSectionRenderer'
 import ImageSectionRenderer from './ImageSectionRenderer'
 import ListSectionRenderer from './ListSectionRenderer'
 import CardSectionRenderer from './CardSectionRenderer'
 
 export interface Options {
-  createElement: Vdom.Renderer
-  getCardComponent: Renderer.ComponentGetter
-  getAtomComponent: Renderer.ComponentGetter
-  getElement: Renderer.ComponentGetter
+  createElement: CreateElement
+  getCardComponent: ElementTypeGetter
+  getAtomComponent: ElementTypeGetter
+  getElement: ElementTypeGetter
 }
 
 export interface Context {
-  markups: Mobiledoc.Markup[]
-  cards: Mobiledoc.Card[]
-  atoms: Mobiledoc.Atom[]
+  markups: Markup[]
+  cards: Card[]
+  atoms: Atom[]
 }
 
 interface RendererDictionary {
-  [type: number]: (section: Mobiledoc.Section) => Vdom.Node
+  [type: number]: (section: Section) => Node
 }
 
 export default ({
@@ -29,27 +34,27 @@ export default ({
   getAtomComponent,
   getElement
 }: Options) => ({ markups, cards, atoms }: Context) => (
-  section: Mobiledoc.Section
-): Vdom.Node =>
+  section: Section
+): Node =>
   (({
-    [Mobiledoc.SectionTypeIdentifier.MARKUP]: MarkupSectionRenderer({
+    [SectionTypeIdentifier.MARKUP]: MarkupSectionRenderer({
       createElement,
       getAtomComponent,
       getElement
     })({ markups, atoms }),
 
-    [Mobiledoc.SectionTypeIdentifier.IMAGE]: ImageSectionRenderer({
+    [SectionTypeIdentifier.IMAGE]: ImageSectionRenderer({
       createElement,
       getElement
     }),
 
-    [Mobiledoc.SectionTypeIdentifier.LIST]: ListSectionRenderer({
+    [SectionTypeIdentifier.LIST]: ListSectionRenderer({
       createElement,
       getAtomComponent,
       getElement
     })({ markups, atoms }),
 
-    [Mobiledoc.SectionTypeIdentifier.CARD]: CardSectionRenderer({
+    [SectionTypeIdentifier.CARD]: CardSectionRenderer({
       createElement,
       getCardComponent
     })({ cards })

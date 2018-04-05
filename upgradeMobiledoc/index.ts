@@ -1,11 +1,11 @@
-import Mobiledoc from '../types/Mobiledoc'
+import Mobiledoc from '../types/Mobiledoc/'
+import Mobiledoc02 from '../types/Mobiledoc/0.2'
 import { semverMatchesMinor } from '../utils'
-import Mobiledoc02x from '../types/Mobiledoc02x'
-import upgradeMobiledoc02x from './0.2.x-0.3.x'
+import upgradeMobiledoc02 from './0.2-0.3'
 
-export { Mobiledoc02x, upgradeMobiledoc02x }
+export { Mobiledoc02, upgradeMobiledoc02 }
 
-export default (mobiledoc: Mobiledoc | Mobiledoc02x): Mobiledoc =>
+export default (mobiledoc: Mobiledoc | Mobiledoc02): Mobiledoc =>
   semverMatchesMinor('0.2')(mobiledoc.version)
-    ? upgradeMobiledoc02x(mobiledoc as Mobiledoc02x)
+    ? upgradeMobiledoc02(mobiledoc as Mobiledoc02)
     : (mobiledoc as Mobiledoc)

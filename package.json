@@ -181,7 +181,8 @@
         "error",
         "always"
       ],
-      "prefer-const": "error"
+      "prefer-const": "error",
+      "standard/array-bracket-even-spacing": "off"
     },
     "overrides": [
       {

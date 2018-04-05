@@ -1,19 +1,18 @@
-import * as Mobiledoc from '../../types/Mobiledoc'
-import * as Vdom from '../../types/Vdom'
-import * as Renderer from '../../types/Renderer'
+import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import { ImageSectionTagName, ImageSection } from '../../types/Mobiledoc'
 import { throwError } from '../../utils'
 
-const TAG_NAME = Mobiledoc.ImageSectionTagName.img
+const TAG_NAME = ImageSectionTagName.img
 
 export interface Options {
-  createElement: Vdom.Renderer
-  getElement: Renderer.ComponentGetter
+  createElement: CreateElement
+  getElement: ElementTypeGetter
 }
 
 export default ({ createElement, getElement }: Options) => ([
   ,
   src
-]: Mobiledoc.ImageSection): Vdom.Node =>
+]: ImageSection): Node =>
   createElement(
     getElement(TAG_NAME) ||
       throwError(

@@ -1,6 +1,6 @@
 import test from 'ava'
 import testRenderPipelines from './test/helpers/testRenderPipelines'
-import mobiledoc from './test/mobiledocs/complete'
+import mobiledoc from './test/mobiledoc'
 import MobiledocVdomRenderer from '.'
 
 const getAtomComponent = type => type

@@ -1,6 +1,5 @@
-import * as Mobiledoc from '../../../types/Mobiledoc'
-import * as Vdom from '../../../types/Vdom'
-import * as Renderer from '../../../types/Renderer'
+import { CreateElement, ElementTypeGetter, Node } from '../../../types'
+import { Markup } from '../../../types/Mobiledoc'
 import { throwError } from '../../../utils'
 
 const attributesArrayToAttributes = (attributesArray: string[]): object =>
@@ -13,14 +12,14 @@ const attributesArrayToAttributes = (attributesArray: string[]): object =>
   )
 
 export interface Options {
-  createElement: Vdom.Renderer
-  getElement: Renderer.ComponentGetter
+  createElement: CreateElement
+  getElement: ElementTypeGetter
 }
 
 export default ({ createElement, getElement }: Options) => (
-  [tagName, attributesArray = []]: Mobiledoc.Markup,
-  children: Vdom.Node[]
-): Vdom.Node =>
+  [tagName, attributesArray = []]: Markup,
+  children: Node[]
+): Node =>
   createElement(
     getElement(tagName) ||
       throwError(

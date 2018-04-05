@@ -1,18 +1,17 @@
-import * as Mobiledoc from '../../../../types/Mobiledoc'
-import * as Vdom from '../../../../types/Vdom'
-import * as Renderer from '../../../../types/Renderer'
+import { CreateElement, ElementTypeGetter, Node } from '../../../../types'
+import { Atom } from '../../../../types/Mobiledoc'
 import { throwError } from '../../../../utils'
 
 export interface Options {
-  createElement: Vdom.Renderer
-  getAtomComponent: Renderer.ComponentGetter
+  createElement: CreateElement
+  getAtomComponent: ElementTypeGetter
 }
 
 export default ({ createElement, getAtomComponent }: Options) => ([
   type,
   text,
   payload
-]: Mobiledoc.Atom): Vdom.Node =>
+]: Atom): Node =>
   createElement(
     getAtomComponent(type) ||
       throwError(

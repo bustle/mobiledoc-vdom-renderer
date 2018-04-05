@@ -23,9 +23,8 @@ export interface AtomMarker extends Array<any> {
 
 export type Marker = TextMarker | AtomMarker
 
-/* Markups, Cards, Atoms */
+/* Markups */
 
-// [tagName, optionalAttributesArray]
 export enum MarkupTagName {
   a = 'a',
   b = 'b',
@@ -38,16 +37,22 @@ export enum MarkupTagName {
   sup = 'sup',
   u = 'u'
 }
+
+// [tagName, optionalAttributesArray]
 export interface Markup extends Array<any> {
   0: MarkupTagName
   1?: string[]
 }
+
+/* Cards */
 
 // [type, payload]
 export interface Card extends Array<any> {
   0: string
   1: object
 }
+
+/* Atoms */
 
 // [type, text, payload]}
 export interface Atom extends Array<any> {
@@ -65,7 +70,7 @@ export enum SectionTypeIdentifier {
   CARD = 10
 }
 
-// [typeIdentifier, tagName, markers]
+/* Markup sections */
 
 export enum MarkupSectionTagName {
   aside = 'aside',
@@ -80,43 +85,54 @@ export enum MarkupSectionTagName {
   'pull-quote' = 'aside' // Mobiledoc 0.3.0
 }
 
+// [typeIdentifier, tagName, markers]
 export interface MarkupSection extends Array<any> {
   0: SectionTypeIdentifier.MARKUP
   1: MarkupSectionTagName
   2: Marker[]
 }
 
-// [typeIdentifier, imageSrc]
+/* Image sections */
+
 export enum ImageSectionTagName {
   img = 'img'
 }
 
+// [typeIdentifier, imageSrc]
 export interface ImageSection extends Array<any> {
   0: SectionTypeIdentifier.IMAGE
   1: string
 }
 
-// [typeIdentifier, tagName, itemMarkers]
+/* List Section */
 
 export enum ListSectionTagName {
   ul = 'ul',
   ol = 'ol'
 }
+
 export enum ListItemTagName {
   li = 'li'
 }
+
 export type ListItem = Marker[]
+
+// [typeIdentifier, tagName, itemMarkers]
 export interface ListSection extends Array<any> {
   0: SectionTypeIdentifier.LIST
   1: ListSectionTagName
   2: ListItem[]
 }
 
+/* Card section */
+
 // [typeIdentifier, index]
 export interface CardSection extends Array<any> {
   0: SectionTypeIdentifier.CARD
   1: number
 }
+
+/* Sections */
 
 export type Section = MarkupSection | ImageSection | ListSection | CardSection
 

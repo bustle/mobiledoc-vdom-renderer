@@ -2,7 +2,7 @@
 
 This package renders [Mobiledoc documents](https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md) through calls to a `createElement` function, often referred to as `h`, for _[hyperscript](https://github.com/hyperhype/hyperscript)_ or provided as a global if you are using [JSX](https://facebook.github.io/jsx/). This allows embedding Mobiledoc content “natively” as _virtual DOM_ in frameworks like [React](https://reactjs.org/), [preact](https://preactjs.com/), or [hyperapp](https://github.com/hyperapp/hyperapp).
 
-Alternatively, you can skip the “virtual” step and build DOM directly with a micro-renderer such as [ultradom](https://github.com/JorgeBucaran/ultradom), or even convert _mobiledocs_ to arbitrary ASTs by adopting `createElement`’s standard `(nodeType: string | Component, props: {}, ...children: Node[]) => Node` signature for your builder.
+Alternatively, you can skip the “virtual” step and build DOM directly with a micro-renderer such as [ultradom](https://github.com/JorgeBucaran/ultradom), or even convert _mobiledocs_ to arbitrary ASTs by adopting `createElement`’s standard `(type: (properties: object) => Node, properties: object, ...children: Node[]) => Node` signature for your builder.
 
 ## Installation
 
@@ -60,8 +60,8 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
   * ##### `createElement` _required_
     ```typescript
     createElement: (
-      type: string | Component,
-      props?: object,
+      type: ElementType,
+      properties?: object,
       ...children: Node[]
     ) => Node
     ```
@@ -70,12 +70,12 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
     ```typescript
     getCardComponent: (type: string) => string | Component
     ```
-    Function which returns a string (_tag name_) or _component_ (`(props: { payload: object }) => Node`) for the given _card type_ (required if rendering a mobiledoc with cards)
+    Function which returns a string (_tag name_) or _component_ (`(properties: { payload: object }) => Node`) for the given _card type_ (required if rendering a mobiledoc with cards)
   * #### `getAtomComponent`
     ```typescript
     getAtomComponent: (type: string) => string | Component
     ```
-    Function which returns a string (_tag name_) or _component_ (`(props: { payload: object }) => Node`) for the given _atom type_ (required if rendering a mobiledoc with atoms)
+    Function which returns a string (_tag name_) or _component_ (`(properties: { payload: object }) => Node`) for the given _atom type_ (required if rendering a mobiledoc with atoms)
   * #### `getElement`
     ```typescript
     getElement: (tagName: string) => string | Component = getElementDefault
@@ -96,9 +96,9 @@ Upgrades a mobiledoc from any released version to the latest specification (`0.3
 getElementDefault: (tagName: string) => string
 ```
 
-`getElement`’s default value is exported as `getElementDefault`, which throws an error on any tag names which are not in [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/Mobiledoc.ts); passing through the tag name instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
+`getElement`’s default value is exported as `getElementDefault`, which throws an error on any tag names which are not in [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/ts); passing through the tag name instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
 
-## Type declarations
+## Type definitions
 
 ```typescript
 import { Mobiledoc } from '@bustle/mobiledoc-vdom-renderer'
@@ -108,7 +108,7 @@ import { Mobiledoc } from '@bustle/mobiledoc-vdom-renderer'
 import Mobiledoc, * as MobiledocTypes from '@bustle/mobiledoc-vdom-renderer/types/mobiledoc'
 ```
 
-This package includes [complete Typescript declarations describing the Mobiledoc format](./types/mobiledoc.ts), which may be imported directly for use with any mobiledoc-related code.
+This package includes [complete Typescript definitions describing the Mobiledoc format](./types/Mobiledoc/index.ts), which may be imported directly for use with any mobiledoc-related code.
 
 ## Contributing
 

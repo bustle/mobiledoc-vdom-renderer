@@ -1,33 +1,37 @@
-import * as Mobiledoc from '../../types/Mobiledoc'
-import * as Vdom from '../../types/Vdom'
-import * as Renderer from '../../types/Renderer'
+import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import {
+  ListItemTagName,
+  ListSection,
+  Atom,
+  Markup
+} from '../../types/Mobiledoc'
 import { throwError } from '../../utils'
 import MarkersRenderer from '../MarkersRenderer'
 
-const ITEM_TAG_NAME = Mobiledoc.ListItemTagName.li
+const ITEM_TAG_NAME = ListItemTagName.li
 
 export interface Options {
-  createElement: Vdom.Renderer
-  getElement: Renderer.ComponentGetter
-  getAtomComponent: Renderer.ComponentGetter
+  createElement: CreateElement
+  getElement: ElementTypeGetter
+  getAtomComponent: ElementTypeGetter
 }
 
 export interface Context {
-  markups: Mobiledoc.Markup[]
-  atoms: Mobiledoc.Atom[]
+  markups: Markup[]
+  atoms: Atom[]
 }
 
 export default ({ createElement, getAtomComponent, getElement }: Options) => ({
   markups,
   atoms
-}: Context) => ([, tagName, items]: Mobiledoc.ListSection): Vdom.Node =>
+}: Context) => ([, tagName, items]: ListSection): Node =>
   createElement(
     getElement(tagName) ||
       throwError(
         `Unhandled element: the list section tag name \`'${tagName}'\` has no corresponding handler.`
       ),
     {},
-    ...items.map((item): Vdom.Node =>
+    ...items.map((item): Node =>
       createElement(
         getElement(ITEM_TAG_NAME) ||
           throwError(
