@@ -1,5 +1,9 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
-import { Card, CardSection } from '../../types/Mobiledoc'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
+import { Card, CardSection } from 'mobiledoc-vdom-renderer/types/Mobiledoc'
 import CardRenderer from './CardRenderer'
 
 export interface Options {

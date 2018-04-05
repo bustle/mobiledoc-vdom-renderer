@@ -1,5 +1,5 @@
 import test from 'ava'
-import testRenderPipelines from '../../test/helpers/testRenderPipelines'
+import testRenderPipelines from 'mobiledoc-vdom-renderer/test/helpers/testRenderPipelines'
 import MarkupSectionRenderer from '.'
 
 const markupSection = [1, 'p', [[0, [], 0, 'Example']]]

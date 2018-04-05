@@ -1,11 +1,15 @@
-import { CreateElement, ElementTypeGetter, Node } from '../types'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
 import {
   Markup,
   Card,
   Atom,
   Section,
   SectionTypeIdentifier
-} from '../types/Mobiledoc'
+} from 'mobiledoc-vdom-renderer/types/Mobiledoc'
 import MarkupSectionRenderer from './MarkupSectionRenderer'
 import ImageSectionRenderer from './ImageSectionRenderer'
 import ListSectionRenderer from './ListSectionRenderer'

@@ -4,6 +4,10 @@
     "module": "ES2015",
     "outDir": "dist",
     "declaration": false,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "mobiledoc-vdom-renderer/*" : ["*"]
+    }
   }
 }

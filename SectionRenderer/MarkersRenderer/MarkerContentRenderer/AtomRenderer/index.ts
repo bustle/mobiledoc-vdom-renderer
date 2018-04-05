@@ -1,6 +1,10 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../../../types'
-import { Atom } from '../../../../types/Mobiledoc'
-import { throwError } from '../../../../utils'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
+import { Atom } from 'mobiledoc-vdom-renderer/types/Mobiledoc'
+import { throwError } from 'mobiledoc-vdom-renderer/utils'
 
 export interface Options {
   createElement: CreateElement

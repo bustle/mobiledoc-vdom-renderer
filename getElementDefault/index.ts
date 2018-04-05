@@ -1,13 +1,17 @@
-import { ElementTypeGetter } from '../types'
+import { ElementTypeGetter } from 'mobiledoc-vdom-renderer/types'
 import {
   MarkupSectionTagName,
   ImageSectionTagName,
   ListSectionTagName,
   ListItemTagName,
   MarkupTagName
-} from '../types/Mobiledoc'
-import { ElementType } from '../types/CreateElement'
-import { includedIn, objectValues, throwError } from '../utils'
+} from 'mobiledoc-vdom-renderer/types/Mobiledoc'
+import { ElementType } from 'mobiledoc-vdom-renderer/types/CreateElement'
+import {
+  includedIn,
+  objectValues,
+  throwError
+} from 'mobiledoc-vdom-renderer/utils'
 
 const isValidElement: (tagName: string) => boolean = includedIn(
   objectValues({

@@ -9,14 +9,14 @@ import Mobiledoc, {
   MarkupSection,
   CardSection,
   Card
-} from '../../types/Mobiledoc/0.3'
+} from 'mobiledoc-vdom-renderer/types/Mobiledoc/0.3'
 import Mobiledoc02, {
   Section as Section02,
   Marker as Marker02,
   MarkupSection as MarkupSection02,
   ListSection as ListSection02
-} from '../../types/Mobiledoc/0.2'
-import { pipe } from '../../utils'
+} from 'mobiledoc-vdom-renderer/types/Mobiledoc/0.2'
+import { pipe } from 'mobiledoc-vdom-renderer/utils'
 
 const TARGET_VERSION = '0.3.1'
 

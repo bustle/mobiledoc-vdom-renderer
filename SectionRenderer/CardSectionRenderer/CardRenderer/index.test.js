@@ -1,5 +1,5 @@
 import test from 'ava'
-import testRenderPipelines from '../../../test/helpers/testRenderPipelines'
+import testRenderPipelines from 'mobiledoc-vdom-renderer/test/helpers/testRenderPipelines'
 import CardRenderer from '.'
 
 const card = ['card-type', { attribute: 'foo', value: 'bar' }]

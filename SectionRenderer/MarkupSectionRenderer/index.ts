@@ -1,6 +1,14 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
-import { Markup, Atom, MarkupSection } from '../../types/Mobiledoc'
-import { throwError } from '../../utils'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
+import {
+  Markup,
+  Atom,
+  MarkupSection
+} from 'mobiledoc-vdom-renderer/types/Mobiledoc'
+import { throwError } from 'mobiledoc-vdom-renderer/utils'
 import MarkersRenderer from '../MarkersRenderer'
 
 export interface Options {

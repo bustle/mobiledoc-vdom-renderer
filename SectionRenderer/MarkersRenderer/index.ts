@@ -1,6 +1,10 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
-import { Marker, Atom, Markup } from '../../types/Mobiledoc'
-import { pipe } from '../../utils'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
+import { Marker, Atom, Markup } from 'mobiledoc-vdom-renderer/types/Mobiledoc'
+import { pipe } from 'mobiledoc-vdom-renderer/utils'
 import MarkupRenderer, {
   Options as MarkupRendererOptions
 } from './MarkupRenderer'

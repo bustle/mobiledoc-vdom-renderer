@@ -1,5 +1,5 @@
 import test from 'ava'
-import testRenderPipelines from '../../test/helpers/testRenderPipelines'
+import testRenderPipelines from 'mobiledoc-vdom-renderer/test/helpers/testRenderPipelines'
 import ListSectionRenderer from '.'
 
 const listSection = [3, 'ul', [[[0, [], 0, 'Item 1']], [[0, [], 0, 'Item 2']]]]

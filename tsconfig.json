@@ -5,6 +5,10 @@
     "outDir": "dist",
     "declaration": true,
     "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "mobiledoc-vdom-renderer/*" : ["*"]
+    },
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,

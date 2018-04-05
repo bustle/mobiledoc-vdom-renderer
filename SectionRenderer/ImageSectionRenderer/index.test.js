@@ -1,5 +1,5 @@
 import test from 'ava'
-import testRenderPipelines from '../../test/helpers/testRenderPipelines'
+import testRenderPipelines from 'mobiledoc-vdom-renderer/test/helpers/testRenderPipelines'
 import ImageSectionRenderer from '.'
 
 const imageSection = [2, '/photo.jpg']

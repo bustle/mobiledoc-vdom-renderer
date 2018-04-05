@@ -1,6 +1,13 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
-import { ImageSectionTagName, ImageSection } from '../../types/Mobiledoc'
-import { throwError } from '../../utils'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
+import {
+  ImageSectionTagName,
+  ImageSection
+} from 'mobiledoc-vdom-renderer/types/Mobiledoc'
+import { throwError } from 'mobiledoc-vdom-renderer/utils'
 
 const TAG_NAME = ImageSectionTagName.img
 

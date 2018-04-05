@@ -1,5 +1,5 @@
 import test from 'ava'
-import testRenderPipelines from '../../../../test/helpers/testRenderPipelines'
+import testRenderPipelines from 'mobiledoc-vdom-renderer/test/helpers/testRenderPipelines'
 import AtomRenderer from '.'
 
 const atom = ['atom-type', 'Atom text', { attribute: 'foo' }]

@@ -1,6 +1,10 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../../types'
-import { Markup } from '../../../types/Mobiledoc'
-import { throwError } from '../../../utils'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
+import { Markup } from 'mobiledoc-vdom-renderer/types/Mobiledoc'
+import { throwError } from 'mobiledoc-vdom-renderer/utils'
 
 const attributesArrayToAttributes = (attributesArray: string[]): object =>
   attributesArray.reduce(

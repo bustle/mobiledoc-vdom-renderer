@@ -1,11 +1,15 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
 import {
   ListItemTagName,
   ListSection,
   Atom,
   Markup
-} from '../../types/Mobiledoc'
-import { throwError } from '../../utils'
+} from 'mobiledoc-vdom-renderer/types/Mobiledoc'
+import { throwError } from 'mobiledoc-vdom-renderer/utils'
 import MarkersRenderer from '../MarkersRenderer'
 
 const ITEM_TAG_NAME = ListItemTagName.li

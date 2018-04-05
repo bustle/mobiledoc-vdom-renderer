@@ -1,4 +1,4 @@
-import Mobiledoc from '../types/Mobiledoc'
+import Mobiledoc from 'mobiledoc-vdom-renderer/types/Mobiledoc'
 
 /* TODO:
   actually just build this mobiledoc in each index.test.js, from the examples in

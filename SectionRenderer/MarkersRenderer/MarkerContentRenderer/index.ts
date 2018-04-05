@@ -1,5 +1,13 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../../types'
-import { Atom, Marker, MarkerTypeIdentifier } from '../../../types/Mobiledoc'
+import {
+  CreateElement,
+  ElementTypeGetter,
+  Node
+} from 'mobiledoc-vdom-renderer/types'
+import {
+  Atom,
+  Marker,
+  MarkerTypeIdentifier
+} from 'mobiledoc-vdom-renderer/types/Mobiledoc'
 import AtomRenderer from './AtomRenderer'
 
 export interface Options {
