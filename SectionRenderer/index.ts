@@ -1,4 +1,10 @@
-import { CreateElement, ElementTypeGetter, Node } from '../types'
+import {
+  CreateElement,
+  CardComponentGetter,
+  AtomComponentGetter,
+  ElementTypeGetter,
+  Node
+} from '../types'
 import {
   Markup,
   Card,
@@ -13,8 +19,8 @@ import CardSectionRenderer from './CardSectionRenderer'
 
 export interface Options {
   createElement: CreateElement
-  getCardComponent: ElementTypeGetter
-  getAtomComponent: ElementTypeGetter
+  getCardComponent: CardComponentGetter
+  getAtomComponent: AtomComponentGetter
   getElement: ElementTypeGetter
 }
 

@@ -1,4 +1,9 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import {
+  CreateElement,
+  AtomComponentGetter,
+  ElementTypeGetter,
+  Node
+} from '../../types'
 import { Marker, Atom, Markup } from '../../types/Mobiledoc'
 import { pipe } from '../../utils'
 import MarkupRenderer, {
@@ -64,7 +69,7 @@ const MarkerMarkupNodesCloser = ({
 
 export interface Options {
   createElement: CreateElement
-  getAtomComponent: ElementTypeGetter
+  getAtomComponent: AtomComponentGetter
   getElement: ElementTypeGetter
 }
 

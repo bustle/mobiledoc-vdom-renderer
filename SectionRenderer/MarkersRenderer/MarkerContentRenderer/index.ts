@@ -1,10 +1,10 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../../types'
+import { CreateElement, AtomComponentGetter, Node } from '../../../types'
 import { Atom, Marker, MarkerTypeIdentifier } from '../../../types/Mobiledoc'
 import AtomRenderer from './AtomRenderer'
 
 export interface Options {
   createElement: CreateElement
-  getAtomComponent: ElementTypeGetter
+  getAtomComponent: AtomComponentGetter
 }
 
 export interface Context {
