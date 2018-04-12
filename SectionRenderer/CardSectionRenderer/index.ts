@@ -1,10 +1,10 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import { CreateElement, CardComponentGetter, Node } from '../../types'
 import { Card, CardSection } from '../../types/Mobiledoc'
 import CardRenderer from './CardRenderer'
 
 export interface Options {
   createElement: CreateElement
-  getCardComponent: ElementTypeGetter
+  getCardComponent: CardComponentGetter
 }
 
 export interface Context {

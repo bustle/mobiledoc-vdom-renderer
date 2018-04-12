@@ -1,10 +1,10 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../../../types'
+import { CreateElement, AtomComponentGetter, Node } from '../../../../types'
 import { Atom } from '../../../../types/Mobiledoc'
 import { throwError } from '../../../../utils'
 
 export interface Options {
   createElement: CreateElement
-  getAtomComponent: ElementTypeGetter
+  getAtomComponent: AtomComponentGetter
 }
 
 export default ({ createElement, getAtomComponent }: Options) => ([

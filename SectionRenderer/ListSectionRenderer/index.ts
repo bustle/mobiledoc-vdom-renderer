@@ -1,4 +1,9 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import {
+  CreateElement,
+  AtomComponentGetter,
+  ElementTypeGetter,
+  Node
+} from '../../types'
 import {
   ListItemTagName,
   ListSection,
@@ -13,7 +18,7 @@ const ITEM_TAG_NAME = ListItemTagName.li
 export interface Options {
   createElement: CreateElement
   getElement: ElementTypeGetter
-  getAtomComponent: ElementTypeGetter
+  getAtomComponent: AtomComponentGetter
 }
 
 export interface Context {
