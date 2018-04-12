@@ -96,11 +96,7 @@ Upgrades a mobiledoc from any released version to the latest specification (`0.3
 ## Type definitions
 
 ```typescript
-import { Mobiledoc } from 'mobiledoc-vdom-renderer'
-```
-
-```typescript
-import Mobiledoc, * as MobiledocTypes from 'mobiledoc-vdom-renderer/types/mobiledoc'
+import { Mobiledoc, MobiledocTypes } from 'mobiledoc-vdom-renderer'
 ```
 
 This package includes [complete Typescript definitions describing the Mobiledoc format](./types/Mobiledoc/index.ts), which may be imported directly for use with any mobiledoc-related code.
