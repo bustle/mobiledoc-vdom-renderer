@@ -15,9 +15,9 @@ export const canParse = semverMatchesMinor(SUPPORTED_MOBILEDOC_VERSION)
 
 export interface Options {
   createElement: CreateElement
-  getCardComponent: ElementTypeGetter
-  getAtomComponent: ElementTypeGetter
-  getElement: ElementTypeGetter
+  getCardComponent?: ElementTypeGetter
+  getAtomComponent?: ElementTypeGetter
+  getElement?: ElementTypeGetter
 }
 
 export default ({
