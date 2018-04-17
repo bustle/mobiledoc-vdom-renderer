@@ -23,6 +23,7 @@
     "watch:lint": "chokidar '**/*.{ts,js}' --ignore node_modules/ --verbose --command 'tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude \"**/*.js\" {path}; eslint {path}'",
     "watch:test": "ava --watch",
     "start": "concurrently 'npm run watch:lint' 'npm run watch:test' --raw",
+    "commitmsg": "commit-msg-must-use-emoji",
     "build": "tsc --project tsconfig.module.json && tsc",
     "prepublishOnly": "npm test && rm -rf dist && npm run build",
     "postpublish": "rm -rf dist"
@@ -48,6 +49,7 @@
   "devDependencies": {
     "ava": "^0.25.0",
     "chokidar-cli": "^1.2.0",
+    "commit-msg-must-use-emoji": "^1.1.3",
     "concurrently": "^3.5.1",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
@@ -58,6 +60,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
     "jsdom": "^11.7.0",
     "nyc": "^11.6.0",
     "preact": "^8.2.7",
