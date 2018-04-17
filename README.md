@@ -83,7 +83,7 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
     ```typescript
     import { getElementDefault } from 'mobiledoc-vdom-renderer'
     ```
-    `getElement`’s default behavior is exported as `getElementDefault`, which passes through valid tag names but throws an error for tags not on [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/ts); passing through all tag names instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
+    `getElement`’s default behavior is exported as `getElementDefault`, which passes through valid tag names but throws an error for tags not on [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/Mobiledoc/0.3/index.ts); passing through all tag names instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
 
 ### `upgradeMobiledoc`
 
@@ -99,7 +99,7 @@ Upgrades a mobiledoc from any released version to the latest specification (`0.3
 import { Mobiledoc, MobiledocTypes } from 'mobiledoc-vdom-renderer'
 ```
 
-This package includes [complete Typescript definitions describing the Mobiledoc format](./types/Mobiledoc/index.ts), which may be imported directly for use with any mobiledoc-related code.
+This package includes [complete Typescript definitions describing the Mobiledoc format](./types/Mobiledoc/0.3/index.ts), which may be imported directly for use with any mobiledoc-related code.
 
 ## Contributing
 
