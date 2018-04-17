@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Render Mobiledoc as VDOM, for React or React-like `createElement` calls",
   "engines": {
-    "node": ">=7"
+    "node": ">=6"
   },
   "files": [
     "dist/"
