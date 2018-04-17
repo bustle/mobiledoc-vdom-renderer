@@ -19,9 +19,11 @@ const isValidElement: (tagName: string) => boolean = includedIn(
   })
 )
 
-const getElementDefault: ElementTypeGetter = (tagName: string): ElementType =>
+const getMarkupComponentDefault: ElementTypeGetter = (
+  tagName: string
+): ElementType =>
   isValidElement(tagName)
     ? tagName
     : throwError(`\`${tagName}\` is not a supported Mobiledoc tag.`)
 
-export default getElementDefault
+export default getMarkupComponentDefault

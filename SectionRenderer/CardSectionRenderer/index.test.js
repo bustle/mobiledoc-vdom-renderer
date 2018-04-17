@@ -8,7 +8,7 @@ testRenderPipelines(({ name, createElement, renderHtml }) => {
   const renderVdom = CardSectionRenderer({
     createElement,
     getCardComponent: type => type,
-    getElement: tagName => tagName
+    getMarkupComponent: tagName => tagName
   })({ cards: [['card-type', {}]] })
 
   test(`${name}: renders a card section`, t =>

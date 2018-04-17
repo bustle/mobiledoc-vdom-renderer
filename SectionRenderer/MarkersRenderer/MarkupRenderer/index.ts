@@ -13,15 +13,15 @@ const attributesArrayToAttributes = (attributesArray: string[]): object =>
 
 export interface Options {
   createElement: CreateElement
-  getElement: ElementTypeGetter
+  getMarkupComponent: ElementTypeGetter
 }
 
-export default ({ createElement, getElement }: Options) => (
+export default ({ createElement, getMarkupComponent }: Options) => (
   [tagName, attributesArray = []]: Markup,
   children: Node[]
 ): Node =>
   createElement(
-    getElement(tagName) ||
+    getMarkupComponent(tagName) ||
       throwError(
         `Unhandled element: the markup tag name \`'${tagName}'\` has no corresponding handler.`
       ),

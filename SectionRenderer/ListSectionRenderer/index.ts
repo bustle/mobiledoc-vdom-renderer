@@ -12,7 +12,7 @@ const ITEM_TAG_NAME = ListItemTagName.li
 
 export interface Options {
   createElement: CreateElement
-  getElement: ElementTypeGetter
+  getMarkupComponent: ElementTypeGetter
   getAtomComponent: ElementTypeGetter
 }
 
@@ -21,24 +21,33 @@ export interface Context {
   atoms: Atom[]
 }
 
-export default ({ createElement, getAtomComponent, getElement }: Options) => ({
-  markups,
-  atoms
-}: Context) => ([, tagName, items]: ListSection): Node =>
+export default ({
+  createElement,
+  getAtomComponent,
+  getMarkupComponent
+}: Options) => ({ markups, atoms }: Context) => ([
+  ,
+  tagName,
+  items
+]: ListSection): Node =>
   createElement(
-    getElement(tagName) ||
+    getMarkupComponent(tagName) ||
       throwError(
         `Unhandled element: the list section tag name \`'${tagName}'\` has no corresponding handler.`
       ),
     {},
     ...items.map((item): Node =>
       createElement(
-        getElement(ITEM_TAG_NAME) ||
+        getMarkupComponent(ITEM_TAG_NAME) ||
           throwError(
             `Unhandled element: the list item tag name \`'${tagName}'\` has no corresponding handler.`
           ),
         {},
-        ...MarkersRenderer({ createElement, getAtomComponent, getElement })({
+        ...MarkersRenderer({
+          createElement,
+          getAtomComponent,
+          getMarkupComponent
+        })({
           markups,
           atoms
         })(item)

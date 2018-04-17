@@ -7,7 +7,7 @@ const markupSection = [1, 'p', [[0, [], 0, 'Example']]]
 testRenderPipelines(({ name, createElement, renderHtml }) => {
   const renderVdom = MarkupSectionRenderer({
     createElement,
-    getElement: tagName => tagName
+    getMarkupComponent: tagName => tagName
   })({})
 
   test(`${name}: renders a markup section`, t =>

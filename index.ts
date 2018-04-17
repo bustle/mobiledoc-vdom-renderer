@@ -2,11 +2,11 @@ import { Mobiledoc, CreateElement, ElementTypeGetter, Node } from './types'
 import * as MobiledocTypes from './types/Mobiledoc'
 import SectionRenderer from './SectionRenderer'
 import upgradeMobiledoc from './upgradeMobiledoc'
-import getElementDefault from './getElementDefault'
+import getMarkupComponentDefault from './getMarkupComponentDefault'
 import { throwError, semverMatchesMinor } from './utils'
 
 export { Mobiledoc, MobiledocTypes }
-export { upgradeMobiledoc, getElementDefault }
+export { upgradeMobiledoc, getMarkupComponentDefault }
 
 export const SUPPORTED_MOBILEDOC_VERSION = '0.3.1'
 
@@ -18,7 +18,7 @@ export interface Options {
   createElement: CreateElement
   getCardComponent?: ElementTypeGetter
   getAtomComponent?: ElementTypeGetter
-  getElement?: ElementTypeGetter
+  getMarkupComponent?: ElementTypeGetter
 }
 
 export default ({
@@ -34,7 +34,7 @@ export default ({
     throwError(
       `You must pass a \`getAtomComponent\` (\`type => Component\`) function to \`MobiledocVdomRenderer\` in order to render atoms (i.e. \`'${type}'\`).`
     ),
-  getElement = getElementDefault
+  getMarkupComponent = getMarkupComponentDefault
 }: Options) => (mobiledoc: Mobiledoc): Node[] =>
   canParse(mobiledoc.version)
     ? mobiledoc.sections.map(
@@ -42,7 +42,7 @@ export default ({
           createElement,
           getCardComponent,
           getAtomComponent,
-          getElement
+          getMarkupComponent
         })({
           markups: mobiledoc.markups,
           cards: mobiledoc.cards,
