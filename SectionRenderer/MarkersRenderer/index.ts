@@ -37,12 +37,12 @@ const MarkerMarkupNodesOpener = ({ markups }: MarkerMarkupsOpenerContext) => ([
 
 const MarkupNodesRenderer = ({
   createElement,
-  getElement
+  getMarkupComponent
 }: MarkupRendererOptions) => (nodes: MarkupNode[]): Node =>
   nodes.reduceRight(
     (innerNode: Node, { markup, children }: MarkupNode): Node =>
       markup
-        ? MarkupRenderer({ createElement, getElement })(markup, [
+        ? MarkupRenderer({ createElement, getMarkupComponent })(markup, [
             ...children,
             innerNode
           ])
@@ -52,13 +52,13 @@ const MarkupNodesRenderer = ({
 
 const MarkerMarkupNodesCloser = ({
   createElement,
-  getElement
+  getMarkupComponent
 }: MarkupRendererOptions) => ([, , closedMarkupCount]: Marker) => (
   nodes: MarkupNode[]
 ): MarkupNode[] =>
   closedMarkupCount
     ? MarkupNodesChildAppender(
-        MarkupNodesRenderer({ createElement, getElement })(
+        MarkupNodesRenderer({ createElement, getMarkupComponent })(
           nodes.slice(-closedMarkupCount)
         )
       )(nodes.slice(0, -closedMarkupCount))
@@ -67,7 +67,7 @@ const MarkerMarkupNodesCloser = ({
 export interface Options {
   createElement: CreateElement
   getAtomComponent: ElementTypeGetter
-  getElement: ElementTypeGetter
+  getMarkupComponent: ElementTypeGetter
 }
 
 export interface Context {
@@ -75,10 +75,11 @@ export interface Context {
   atoms: Atom[]
 }
 
-export default ({ createElement, getAtomComponent, getElement }: Options) => ({
-  markups,
-  atoms
-}: Context) => (markers: Marker[]): Node[] =>
+export default ({
+  createElement,
+  getAtomComponent,
+  getMarkupComponent
+}: Options) => ({ markups, atoms }: Context) => (markers: Marker[]): Node[] =>
   markers.reduce(
     (openMarkups: MarkupNode[], marker: Marker): MarkupNode[] =>
       pipe([
@@ -88,7 +89,7 @@ export default ({ createElement, getAtomComponent, getElement }: Options) => ({
             marker
           )
         ),
-        MarkerMarkupNodesCloser({ createElement, getElement })(marker)
+        MarkerMarkupNodesCloser({ createElement, getMarkupComponent })(marker)
       ])(openMarkups),
     [{ children: [] }]
   )[0].children

@@ -7,7 +7,7 @@ const imageSection = [2, '/photo.jpg']
 testRenderPipelines(({ name, createElement, renderHtml }) => {
   const renderVdom = ImageSectionRenderer({
     createElement,
-    getElement: tagName => tagName
+    getMarkupComponent: tagName => tagName
   })
 
   test(`${name}: renders an image section`, t =>

@@ -6,15 +6,15 @@ const TAG_NAME = ImageSectionTagName.img
 
 export interface Options {
   createElement: CreateElement
-  getElement: ElementTypeGetter
+  getMarkupComponent: ElementTypeGetter
 }
 
-export default ({ createElement, getElement }: Options) => ([
+export default ({ createElement, getMarkupComponent }: Options) => ([
   ,
   src
 ]: ImageSection): Node =>
   createElement(
-    getElement(TAG_NAME) ||
+    getMarkupComponent(TAG_NAME) ||
       throwError(
         `Unhandled element: the image section tag name \`'${TAG_NAME}'\` has no corresponding handler.`
       ),

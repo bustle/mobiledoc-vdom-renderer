@@ -12,7 +12,7 @@ testRenderPipelines(({ name, createElement, renderHtml }) => {
     createElement,
     getAtomComponent: type => type,
     getCardComponent: type => type,
-    getElement: tagName => tagName
+    getMarkupComponent: tagName => tagName
   })({ cards: [['card-type', {}]] })
 
   test(`${name}: renders a markup section`, t =>

@@ -53,7 +53,7 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
     createElement: CreateElement,
     getCardComponent?: ComponentGetter,
     getAtomComponent?: ComponentGetter,
-    getElement?: ComponentGetter = getElementDefault
+    getMarkupComponent?: ComponentGetter = getMarkupComponentDefault
   }
   ```
   - ##### `createElement` _required_
@@ -75,15 +75,15 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
     getAtomComponent: (type: string) => string | Component
     ```
     Function which returns a string (_tag name_) or _component_ (`(properties: { payload: object }) => Node`) for the given _atom type_ (required if rendering a mobiledoc with atoms)
-  - ##### `getElement`
+  - ##### `getMarkupComponent`
     ```typescript
-    getElement: (tagName: string) => string | Component = getElementDefault
+    getMarkupComponent: (tagName: string) => string | Component = getMarkupComponentDefault
     ```
     Function which returns a string (_tag name_) or _component_ (`(attributes: object) => Node`) to override rendering for the given tag name (for instance, to mix in HTML attributes or render a custom component instead)
     ```typescript
-    import { getElementDefault } from 'mobiledoc-vdom-renderer'
+    import { getMarkupComponentDefault } from 'mobiledoc-vdom-renderer'
     ```
-    `getElement`’s default behavior is exported as `getElementDefault`, which passes through valid tag names but throws an error for tags not on [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/Mobiledoc/0.3/index.ts); passing through all tag names instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
+    `getMarkupComponent`’s default behavior is exported as `getMarkupComponentDefault`, which passes through valid tag names but throws an error for tags not on [Mobiledoc’s _markup section_ or _markup_ whitelists](./types/Mobiledoc/0.3/index.ts); passing through all tag names instead (as in `tagName => tagName`) allows (non-standard) mobiledocs containing arbitrary tags to be rendered
 
 ### `upgradeMobiledoc`
 

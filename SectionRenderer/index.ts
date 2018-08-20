@@ -15,7 +15,7 @@ export interface Options {
   createElement: CreateElement
   getCardComponent: ElementTypeGetter
   getAtomComponent: ElementTypeGetter
-  getElement: ElementTypeGetter
+  getMarkupComponent: ElementTypeGetter
 }
 
 export interface Context {
@@ -32,7 +32,7 @@ export default ({
   createElement,
   getCardComponent,
   getAtomComponent,
-  getElement
+  getMarkupComponent
 }: Options) => ({ markups, cards, atoms }: Context) => (
   section: Section
 ): Node =>
@@ -40,18 +40,18 @@ export default ({
     [SectionTypeIdentifier.MARKUP]: MarkupSectionRenderer({
       createElement,
       getAtomComponent,
-      getElement
+      getMarkupComponent
     })({ markups, atoms }),
 
     [SectionTypeIdentifier.IMAGE]: ImageSectionRenderer({
       createElement,
-      getElement
+      getMarkupComponent
     }),
 
     [SectionTypeIdentifier.LIST]: ListSectionRenderer({
       createElement,
       getAtomComponent,
-      getElement
+      getMarkupComponent
     })({ markups, atoms }),
 
     [SectionTypeIdentifier.CARD]: CardSectionRenderer({

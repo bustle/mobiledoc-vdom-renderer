@@ -29,7 +29,7 @@ const markers = [
 testRenderPipelines(({ name, createElement, renderHtml }) => {
   const renderVdom = MarkersRenderer({
     createElement,
-    getElement: type => type
+    getMarkupComponent: type => type
   })({ markups: [['b'], ['a', ['href', 'https://www.example.com/']]] })
 
   test(`${name}: render basic markers`, t =>

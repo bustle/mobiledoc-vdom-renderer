@@ -1,13 +1,13 @@
 import test from 'ava'
-import getElementDefault from '.'
+import getMarkupComponentDefault from '.'
 
 test('passes through valid elements', t => {
-  t.snapshot(getElementDefault('a'))
+  t.snapshot(getMarkupComponentDefault('a'))
 })
 
 test('throws on invalid elements', t => {
   try {
-    getElementDefault('small')
+    getMarkupComponentDefault('small')
   } catch (error) {
     t.snapshot(error.message)
   }

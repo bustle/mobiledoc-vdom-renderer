@@ -8,7 +8,7 @@ const children = ['Example']
 testRenderPipelines(({ name, createElement, renderHtml }) => {
   const renderVdom = MarkupRenderer({
     createElement,
-    getElement: type => type
+    getMarkupComponent: type => type
   })
 
   test(`${name}: renders a basic markup`, t =>
