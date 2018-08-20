@@ -36,21 +36,18 @@ export default ({
         `Unhandled element: the list section tag name \`'${tagName}'\` has no corresponding handler.`
       ),
     {},
-    ...items.map((item): Node =>
-      createElement(
-        getMarkupComponent(ITEM_TAG_NAME) ||
-          throwError(
-            `Unhandled element: the list item tag name \`'${tagName}'\` has no corresponding handler.`
-          ),
-        {},
-        ...MarkersRenderer({
-          createElement,
-          getAtomComponent,
-          getMarkupComponent
-        })({
-          markups,
-          atoms
-        })(item)
-      )
+    ...items.map(
+      (item): Node =>
+        createElement(
+          getMarkupComponent(ITEM_TAG_NAME) ||
+            throwError(
+              `Unhandled element: the list item tag name \`'${tagName}'\` has no corresponding handler.`
+            ),
+          {},
+          ...MarkersRenderer({ createElement, getAtomComponent, getElement })({
+            markups,
+            atoms
+          })(item)
+        )
     )
   )

@@ -47,7 +47,7 @@ const expandSections = (mobiledoc: Mobiledoc02) => ({
 /* Upgrade markers by adding `typeIdentifier` */
 
 const upgradeMarker = (marker: Marker02): Marker =>
-  [MarkerTypeIdentifier.TEXT, ...marker] as Marker
+  [MarkerTypeIdentifier.TEXT].concat(marker) as Marker
 
 /* Upgrade markup sections (`pull-quote` -> `aside`, upgrade markers) */
 

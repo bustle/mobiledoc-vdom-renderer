@@ -47,7 +47,7 @@ Renderer: (options: RendererOptions) => RenderFunction
 
 Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the supplied options
 
-* #### `options` _required_
+- #### `options` _required_
   ```typescript
   {
     createElement: CreateElement,
@@ -56,7 +56,7 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
     getMarkupComponent?: ComponentGetter = getMarkupComponentDefault
   }
   ```
-  * ##### `createElement` _required_
+  - ##### `createElement` _required_
     ```typescript
     createElement: (
       type: string | Component,
@@ -65,17 +65,17 @@ Creates a _render function_ (`(mobiledoc: Mobiledoc) => Node[]`) from the suppli
     ) => Node
     ```
     Any compatible function such as `React.createElement` or hyperscript `h`
-  * ##### `getCardComponent`
+  - ##### `getCardComponent`
     ```typescript
     getCardComponent: (type: string) => string | Component
     ```
     Function which returns a string (_tag name_) or _component_ (`(properties: { payload: object }) => Node`) for the given _card type_ (required if rendering a mobiledoc with cards)
-  * ##### `getAtomComponent`
+  - ##### `getAtomComponent`
     ```typescript
     getAtomComponent: (type: string) => string | Component
     ```
     Function which returns a string (_tag name_) or _component_ (`(properties: { payload: object }) => Node`) for the given _atom type_ (required if rendering a mobiledoc with atoms)
-  * ##### `getMarkupComponent`
+  - ##### `getMarkupComponent`
     ```typescript
     getMarkupComponent: (tagName: string) => string | Component = getMarkupComponentDefault
     ```
@@ -109,7 +109,7 @@ The code is written in [Typescript](http://www.typescriptlang.org/) in a pure fu
 
 ### Test-driven development
 
-* #### Installation
+- #### Installation
 
 ```shell
 git clone https://github.com/bustle/mobiledoc-vdom-renderer.git
@@ -117,32 +117,32 @@ cd mobiledoc-vdom-renderer/
 npm install
 ```
 
-* #### `npm start`
+- #### `npm start`
 
   Watches the filesystem for changes ([chokidar-cli](https://github.com/kimmobrunfeldt/chokidar-cli)) then lints (Typescript, [Standard style](https://standardjs.com/), [functional JS practices](https://github.com/jfmengels/eslint-plugin-fp)) and tests ([ava snapshots](https://github.com/avajs/ava#snapshot-testing)) each file you touch
 
-* #### Other useful commands
-  * ##### `npm test`
+- #### Other useful commands
+  - ##### `npm test`
     Run the linters and all tests and generate a coverage report ([nyc](https://github.com/istanbuljs/nyc))
-  * ##### `npm run snapshot`
+  - ##### `npm run snapshot`
     Updates all snapshots; check your `git` diff before committing!
-  * ##### `npm run format`
+  - ##### `npm run format`
     Fixes many linting errors and applies [prettier whitespace conventions](https://github.com/prettier/prettier)
 
 ## More for Mobiledoc
 
 ### Renderers
 
-* [mobiledoc-react-renderer](https://github.com/dailybeast/mobiledoc-react-renderer)
-* [mobiledoc-dom-renderer](https://github.com/bustle/mobiledoc-dom-renderer)
-* [mobiledoc-text-renderer](https://github.com/bustle/mobiledoc-text-renderer)
+- [mobiledoc-react-renderer](https://github.com/dailybeast/mobiledoc-react-renderer)
+- [mobiledoc-dom-renderer](https://github.com/bustle/mobiledoc-dom-renderer)
+- [mobiledoc-text-renderer](https://github.com/bustle/mobiledoc-text-renderer)
 
 ### Editors
 
-* [react-mobiledoc-editor](https://github.com/joshfrench/react-mobiledoc-editor)
-* [ember-mobiledoc-editor](https://github.com/bustle/ember-mobiledoc-editor)
-* [vue-mobiledoc-editor](https://github.com/alidcastano/vue-mobiledoc-editor)
+- [react-mobiledoc-editor](https://github.com/joshfrench/react-mobiledoc-editor)
+- [ember-mobiledoc-editor](https://github.com/bustle/ember-mobiledoc-editor)
+- [vue-mobiledoc-editor](https://github.com/alidcastano/vue-mobiledoc-editor)
 
 ### Utilities
 
-* [mobiledoc-kit](https://github.com/bustle/mobiledoc-kit) editor toolkit
+- [mobiledoc-kit](https://github.com/bustle/mobiledoc-kit) editor toolkit
