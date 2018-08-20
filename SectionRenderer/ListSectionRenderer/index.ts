@@ -44,7 +44,11 @@ export default ({
               `Unhandled element: the list item tag name \`'${tagName}'\` has no corresponding handler.`
             ),
           {},
-          ...MarkersRenderer({ createElement, getAtomComponent, getElement })({
+          ...MarkersRenderer({
+            createElement,
+            getAtomComponent,
+            getMarkupComponent
+          })({
             markups,
             atoms
           })(item)

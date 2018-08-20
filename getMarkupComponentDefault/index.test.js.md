@@ -1,4 +1,4 @@
-# Snapshot report for `getElementDefault/index.test.js`
+# Snapshot report for `getMarkupComponentDefault/index.test.js`
 
 The actual snapshot is saved in `index.test.js.snap`.
 
