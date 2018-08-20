@@ -25,8 +25,9 @@
     "start": "concurrently 'npm run watch:lint' 'npm run watch:test' --raw",
     "commitmsg": "commit-msg-must-use-emoji",
     "build": "tsc --project tsconfig.module.json && tsc",
+    "clean": "rm -rf dist",
     "prepublishOnly": "npm test && rm -rf dist && npm run build",
-    "postpublish": "rm -rf dist"
+    "postpublish": "npm run clean"
   },
   "repository": {
     "type": "git",
