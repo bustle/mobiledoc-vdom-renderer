@@ -27,10 +27,12 @@ const MarkerMarkupNodesOpener = ({ markups }: MarkerMarkupsOpenerContext) => ([
   openMarkupIndexes
 ]: Marker) => (nodes: MarkupNode[]): MarkupNode[] => [
   ...nodes,
-  ...openMarkupIndexes.map((markupIndex): MarkupNode => ({
-    markup: markups[markupIndex],
-    children: []
-  }))
+  ...openMarkupIndexes.map(
+    (markupIndex): MarkupNode => ({
+      markup: markups[markupIndex],
+      children: []
+    })
+  )
 ]
 
 const MarkupNodesRenderer = ({

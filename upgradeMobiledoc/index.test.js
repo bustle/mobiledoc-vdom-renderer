@@ -20,7 +20,10 @@ const mobiledoc03x = {
   atoms: []
 }
 
-test(t => {
+test('can upgrade version 0.2.x mobiledocs', t => {
   t.snapshot(upgradeMobiledoc(mobiledoc02x))
+})
+
+test('passes through 0.3.x mobiledocs', t => {
   t.snapshot(upgradeMobiledoc(mobiledoc03x))
 })

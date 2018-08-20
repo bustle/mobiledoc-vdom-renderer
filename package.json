@@ -2,21 +2,29 @@
   "name": "mobiledoc-vdom-renderer",
   "version": "1.0.0",
   "description": "Render Mobiledoc as VDOM, for React or React-like `createElement` calls",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">=6"
+  },
+  "files": [
+    "dist/"
+  ],
+  "module": "dist/module/index.js",
+  "types": "dist/module/index.d.ts",
+  "main": "dist/commonjs/index.js",
   "scripts": {
-    "lint": "tsc --pretty --noEmit; npm run lint:ts; npm run lint:js",
-    "lint:ts": "tslint --config tslint.json --project tsconfig.json --exclude '**/*.js' --format stylish || true",
-    "lint:js": "eslint . --ext .ts .js --ignore-path .gitignore || true",
-    "format": "eslint . --ext .ts .js --ignore-path .gitignore --fix && prettier '**/*.md' --write",
-    "test:js": "nyc --require ts-node/register ava",
-    "test": "npm run lint && npm run test:js",
+    "typecheck": "tsc --pretty --noEmit",
+    "lint:ts": "tslint --config tslint.json --project tsconfig.json --exclude '**/*.js' --format stylish",
+    "lint:js": "eslint . --ext .ts,.js --ignore-path .gitignore",
+    "lint": "npm run typecheck; tsc --pretty --noEmit; npm run lint:ts; npm run lint:js",
+    "format": "eslint . --ext .ts,.js --ignore-path .gitignore --fix && prettier '**/*.md' --write",
+    "test:js": "nyc ava",
+    "test": "npm run typecheck && tsc --pretty --noEmit && npm run lint:ts && npm run lint:js && npm run test:js",
     "snapshot": "ava --update-snapshots",
     "watch:lint": "chokidar '**/*.{ts,js}' --ignore node_modules/ --verbose --command 'tsc --pretty --noEmit; tslint --config tslint.json --project tsconfig.json --exclude \"**/*.js\" {path}; eslint {path}'",
     "watch:test": "ava --watch",
     "start": "concurrently 'npm run watch:lint' 'npm run watch:test' --raw",
-    "build": "tsc --project tsconfig.module.json && renamer --find .js --replace .mjs 'dist/**/*.js' && tsc",
+    "commitmsg": "commit-msg-must-use-emoji",
+    "build": "tsc --project tsconfig.module.json && tsc",
     "prepublishOnly": "npm test && rm -rf dist && npm run build",
     "postpublish": "rm -rf dist"
   },
@@ -41,29 +49,30 @@
   "devDependencies": {
     "ava": "^0.25.0",
     "chokidar-cli": "^1.2.0",
-    "concurrently": "^3.5.1",
-    "eslint": "^4.19.1",
+    "commit-msg-must-use-emoji": "^1.1.3",
+    "concurrently": "^3.6.1",
+    "eslint": "^5.4.0",
     "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-ava": "^4.5.1",
+    "eslint-plugin-ava": "^5.1.0",
     "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import": "^2.10.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "jsdom": "^11.7.0",
-    "nyc": "^11.6.0",
-    "preact": "^8.2.7",
-    "preact-render-to-string": "^3.7.0",
-    "prettier": "^1.11.1",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
-    "renamer": "^0.6.1",
-    "ts-node": "^5.0.1",
-    "tslint": "^5.9.1",
-    "tslint-config-standard": "^7.0.0",
-    "typescript": "^2.8.1",
-    "typescript-eslint-parser": "^14.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "husky": "^0.14.3",
+    "jsdom": "^12.0.0",
+    "nyc": "^12.0.2",
+    "preact": "^8.3.1",
+    "preact-render-to-string": "^3.8.2",
+    "prettier": "^1.14.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^7.1.0",
+    "typescript": "^3.0.1",
+    "typescript-eslint-parser": "^18.0.0",
     "ultradom": "^2.3.4"
   },
   "prettier": {
@@ -73,7 +82,7 @@
   },
   "ava": {
     "require": [
-      "ts-node/register"
+      "ts-node/register/transpile-only"
     ]
   },
   "nyc": {
@@ -89,7 +98,7 @@
       "text-summary"
     ],
     "require": [
-      "ts-node/register"
+      "ts-node/register/transpile-only"
     ],
     "all": true
   },

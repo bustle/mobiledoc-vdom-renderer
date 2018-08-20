@@ -1,10 +1,11 @@
 import { Mobiledoc, CreateElement, ElementTypeGetter, Node } from './types'
+import * as MobiledocTypes from './types/Mobiledoc'
 import SectionRenderer from './SectionRenderer'
 import upgradeMobiledoc from './upgradeMobiledoc'
 import getElementDefault from './getElementDefault'
 import { throwError, semverMatchesMinor } from './utils'
 
-export { Mobiledoc }
+export { Mobiledoc, MobiledocTypes }
 export { upgradeMobiledoc, getElementDefault }
 
 export const SUPPORTED_MOBILEDOC_VERSION = '0.3.1'
@@ -15,9 +16,9 @@ export const canParse = semverMatchesMinor(SUPPORTED_MOBILEDOC_VERSION)
 
 export interface Options {
   createElement: CreateElement
-  getCardComponent: ElementTypeGetter
-  getAtomComponent: ElementTypeGetter
-  getElement: ElementTypeGetter
+  getCardComponent?: ElementTypeGetter
+  getAtomComponent?: ElementTypeGetter
+  getElement?: ElementTypeGetter
 }
 
 export default ({
