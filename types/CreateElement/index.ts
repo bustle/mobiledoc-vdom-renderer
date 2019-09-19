@@ -11,7 +11,7 @@ export type ElementType = string | Component
 
 export type CreateElement = (
   elementType: ElementType,
-  properties?: object,
+  properties?: object | null,
   ...children: Node[] // eslint-disable-line fp/no-rest-parameters
 ) => Node
 
