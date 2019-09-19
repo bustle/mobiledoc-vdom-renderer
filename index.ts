@@ -50,7 +50,5 @@ export default ({
         })
       )
     : throwError(
-        `Unable to parse the passed Mobiledoc version \`'${
-          mobiledoc.version
-        }'\`.`
+        `Unable to parse the passed Mobiledoc version \`'${mobiledoc.version}'\`.`
       )

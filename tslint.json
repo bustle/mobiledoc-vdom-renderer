@@ -7,14 +7,7 @@
     "no-implicit-dependencies": false,
     "no-object-literal-type-assertion": false,
     "object-literal-sort-keys": false,
-    "ordered-imports": [
-      true,
-      {
-        "import-sources-order": "any",
-        "grouped-imports": true,
-        "named-imports-order": "any"
-      }
-    ],
+    "ordered-imports": false,
     "ter-indent": false
   }
 }
