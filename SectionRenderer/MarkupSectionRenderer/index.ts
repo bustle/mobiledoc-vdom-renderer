@@ -14,6 +14,15 @@ export interface Context {
   atoms: Atom[]
 }
 
+const attributesArrayToAttributes = (attributesArray: string[]): object =>
+  attributesArray.reduce(
+    (accumulator, value, index) =>
+      index % 2 !== 0
+        ? { ...accumulator, [attributesArray[index - 1]]: value }
+        : accumulator,
+    {}
+  )
+
 export default ({
   createElement,
   getAtomComponent,
@@ -21,14 +30,15 @@ export default ({
 }: Options) => ({ markups, atoms }: Context) => ([
   ,
   tagName,
-  markers
+  markers,
+  attributes
 ]: MarkupSection): Node =>
   createElement(
     getMarkupComponent(tagName) ||
       throwError(
         `Unhandled element: the markup section \`'${tagName}'\` has no corresponding handler.`
       ),
-    {},
+    attributesArrayToAttributes(attributes || []),
     ...MarkersRenderer({ createElement, getAtomComponent, getMarkupComponent })(
       {
         markups,

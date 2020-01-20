@@ -90,6 +90,12 @@ export interface MarkupSection extends Array<any> {
   0: SectionTypeIdentifier.MARKUP
   1: MarkupSectionTagName
   2: Marker[]
+  3?: Attributes
+}
+
+export interface Attributes extends Array<any> {
+  0: 'data-md-text-align'
+  1: 'left' | 'right' | 'center'
 }
 
 /* Image sections */
