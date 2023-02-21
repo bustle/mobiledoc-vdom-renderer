@@ -1,4 +1,4 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import { ElementTypeGetter, Node } from '../../types'
 import { Marker, Atom, Markup } from '../../types/Mobiledoc'
 import { pipe } from '../../utils'
 import MarkupRenderer, {
@@ -35,14 +35,13 @@ const MarkerMarkupNodesOpener = ({ markups }: MarkerMarkupsOpenerContext) => ([
   )
 ]
 
-const MarkupNodesRenderer = ({
-  createElement,
-  getMarkupComponent
-}: MarkupRendererOptions) => (nodes: MarkupNode[]): Node =>
+const MarkupNodesRenderer = ({ getMarkupComponent }: MarkupRendererOptions) => (
+  nodes: MarkupNode[]
+): Node =>
   nodes.reduceRight(
     (innerNode: Node, { markup, children }: MarkupNode): Node =>
       markup
-        ? MarkupRenderer({ createElement, getMarkupComponent })(markup, [
+        ? MarkupRenderer({ getMarkupComponent })(markup, [
             ...children,
             innerNode
           ])
@@ -51,21 +50,19 @@ const MarkupNodesRenderer = ({
   )
 
 const MarkerMarkupNodesCloser = ({
-  createElement,
   getMarkupComponent
 }: MarkupRendererOptions) => ([, , closedMarkupCount]: Marker) => (
   nodes: MarkupNode[]
 ): MarkupNode[] =>
   closedMarkupCount
     ? MarkupNodesChildAppender(
-        MarkupNodesRenderer({ createElement, getMarkupComponent })(
+        MarkupNodesRenderer({ getMarkupComponent })(
           nodes.slice(-closedMarkupCount)
         )
       )(nodes.slice(0, -closedMarkupCount))
     : nodes
 
 export interface Options {
-  createElement: CreateElement
   getAtomComponent: ElementTypeGetter
   getMarkupComponent: ElementTypeGetter
 }
@@ -75,21 +72,18 @@ export interface Context {
   atoms: Atom[]
 }
 
-export default ({
-  createElement,
-  getAtomComponent,
-  getMarkupComponent
-}: Options) => ({ markups, atoms }: Context) => (markers: Marker[]): Node[] =>
+export default ({ getAtomComponent, getMarkupComponent }: Options) => ({
+  markups,
+  atoms
+}: Context) => (markers: Marker[]): Node[] =>
   markers.reduce(
     (openMarkups: MarkupNode[], marker: Marker): MarkupNode[] =>
       pipe([
         MarkerMarkupNodesOpener({ markups })(marker),
         MarkupNodesChildAppender(
-          MarkerContentRenderer({ createElement, getAtomComponent })({ atoms })(
-            marker
-          )
+          MarkerContentRenderer({ getAtomComponent })({ atoms })(marker)
         ),
-        MarkerMarkupNodesCloser({ createElement, getMarkupComponent })(marker)
+        MarkerMarkupNodesCloser({ getMarkupComponent })(marker)
       ])(openMarkups),
     [{ children: [] }]
   )[0].children

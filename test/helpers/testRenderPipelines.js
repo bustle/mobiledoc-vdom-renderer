@@ -1,8 +1,6 @@
 import { JSDOM } from 'jsdom'
-import { h as ultradomCreateElement, patch as ultradomMount } from 'ultradom'
-import { h as preactCreateElement } from 'preact'
+import { patch as ultradomMount } from 'ultradom'
 import preactRender from 'preact-render-to-string'
-import { createElement as reactCreateElement } from 'react'
 import { renderToString as reactRender } from 'react-dom/server'
 
 const ultradomRender = vdom => {
@@ -14,17 +12,14 @@ const ultradomRender = vdom => {
 const pipelines = [
   {
     name: 'ultradom',
-    createElement: ultradomCreateElement,
     renderHtml: nodes => ultradomRender(nodes)
   },
   {
     name: 'preact',
-    createElement: preactCreateElement,
-    renderHtml: nodes => preactRender(preactCreateElement('root', {}, nodes)) // preact requires a root node
+    renderHtml: nodes => preactRender
   },
   {
     name: 'react',
-    createElement: reactCreateElement,
     renderHtml: reactRender
   }
 ]

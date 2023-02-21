@@ -4,9 +4,8 @@ import CardSectionRenderer from '.'
 
 const cardSection = [10, 0]
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = CardSectionRenderer({
-    createElement,
     getCardComponent: type => type,
     getMarkupComponent: tagName => tagName
   })({ cards: [['card-type', {}]] })

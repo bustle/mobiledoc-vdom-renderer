@@ -4,9 +4,8 @@ import ListSectionRenderer from '.'
 
 const listSection = [3, 'ul', [[[0, [], 0, 'Item 1']], [[0, [], 0, 'Item 2']]]]
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = ListSectionRenderer({
-    createElement,
     getMarkupComponent: tagName => tagName
   })({})
 

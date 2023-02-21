@@ -1,4 +1,4 @@
-import { CreateElement, ElementTypeGetter, Node } from '../types'
+import { ElementTypeGetter, Node } from '../types'
 import {
   Markup,
   Card,
@@ -12,7 +12,6 @@ import ListSectionRenderer from './ListSectionRenderer'
 import CardSectionRenderer from './CardSectionRenderer'
 
 export interface Options {
-  createElement: CreateElement
   getCardComponent: ElementTypeGetter
   getAtomComponent: ElementTypeGetter
   getMarkupComponent: ElementTypeGetter
@@ -29,7 +28,6 @@ interface RendererDictionary {
 }
 
 export default ({
-  createElement,
   getCardComponent,
   getAtomComponent,
   getMarkupComponent
@@ -38,24 +36,20 @@ export default ({
 ): Node =>
   (({
     [SectionTypeIdentifier.MARKUP]: MarkupSectionRenderer({
-      createElement,
       getAtomComponent,
       getMarkupComponent
     })({ markups, atoms }),
 
     [SectionTypeIdentifier.IMAGE]: ImageSectionRenderer({
-      createElement,
       getMarkupComponent
     }),
 
     [SectionTypeIdentifier.LIST]: ListSectionRenderer({
-      createElement,
       getAtomComponent,
       getMarkupComponent
     })({ markups, atoms }),
 
     [SectionTypeIdentifier.CARD]: CardSectionRenderer({
-      createElement,
       getCardComponent
     })({ cards })
   } as RendererDictionary)[section[0]](section))

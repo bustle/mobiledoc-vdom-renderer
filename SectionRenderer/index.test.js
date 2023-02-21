@@ -7,9 +7,8 @@ const imageSection = [2, '/photo.jpg']
 const listSection = [3, 'ul', [[[0, [], 0, 'Item 1']], [[0, [], 0, 'Item 2']]]]
 const cardSection = [10, 0]
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = SectionRenderer({
-    createElement,
     getAtomComponent: type => type,
     getCardComponent: type => type,
     getMarkupComponent: tagName => tagName

@@ -4,11 +4,11 @@ import CardRenderer from '.'
 
 const card = ['card-type', { attribute: 'foo', value: 'bar' }]
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = CardRenderer({
-    createElement,
-    getCardComponent: type => ({ payload }) =>
-      createElement(type, { attribute: payload.attribute }, payload.value)
+    getCardComponent: Type => ({ payload }) => (
+      <Type attribute={payload.attribute}>{payload.value}</Type>
+    )
   })
 
   test(`${name}: renders a basic card`, t =>

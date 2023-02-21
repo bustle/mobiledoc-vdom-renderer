@@ -1,4 +1,4 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../../types'
+import { ElementTypeGetter, Node } from '../../../types'
 import { Markup } from '../../../types/Mobiledoc'
 import { throwError } from '../../../utils'
 
@@ -12,19 +12,18 @@ const attributesArrayToAttributes = (attributesArray: string[]): object =>
   )
 
 export interface Options {
-  createElement: CreateElement
   getMarkupComponent: ElementTypeGetter
 }
 
-export default ({ createElement, getMarkupComponent }: Options) => (
+export default ({ getMarkupComponent }: Options) => (
   [tagName, attributesArray = []]: Markup,
   children: Node[]
-): Node =>
-  createElement(
+): Node => {
+  const Tag =
     getMarkupComponent(tagName) ||
-      throwError(
-        `Unhandled element: the markup tag name \`'${tagName}'\` has no corresponding handler.`
-      ),
-    attributesArrayToAttributes(attributesArray),
-    ...children
-  )
+    throwError(
+      `Unhandled element: the markup tag name \`'${tagName}'\` has no corresponding handler.`
+    )
+
+  return <Tag {...attributesArrayToAttributes(attributesArray)}>{children}</Tag>
+}

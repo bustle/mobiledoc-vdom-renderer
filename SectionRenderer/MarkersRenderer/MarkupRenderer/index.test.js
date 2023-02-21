@@ -5,9 +5,8 @@ import MarkupRenderer from '.'
 const markup = ['a', ['href', 'https://www.example.com/']]
 const children = ['Example']
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = MarkupRenderer({
-    createElement,
     getMarkupComponent: type => type
   })
 

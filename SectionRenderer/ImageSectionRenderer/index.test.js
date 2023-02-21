@@ -4,9 +4,8 @@ import ImageSectionRenderer from '.'
 
 const imageSection = [2, '/photo.jpg']
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = ImageSectionRenderer({
-    createElement,
     getMarkupComponent: tagName => tagName
   })
 

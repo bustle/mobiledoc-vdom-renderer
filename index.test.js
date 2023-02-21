@@ -6,9 +6,8 @@ import MobiledocVdomRenderer, { canParse } from '.'
 const getAtomComponent = type => type
 const getCardComponent = type => type
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = MobiledocVdomRenderer({
-    createElement,
     getAtomComponent,
     getCardComponent
   })
@@ -22,7 +21,7 @@ test(`Does not try to parse unsupported mobiledocs`, t => {
 
   t.snapshot(canParse('0.3.0'))
 
-  const renderer = MobiledocVdomRenderer({ createElement: () => {} })
+  const renderer = MobiledocVdomRenderer()
   try {
     renderer({ version: '0.2.1' })
   } catch (error) {

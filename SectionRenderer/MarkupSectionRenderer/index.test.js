@@ -9,9 +9,8 @@ const markupSection = [
   ['data-md-text-align', 'right']
 ]
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = MarkupSectionRenderer({
-    createElement,
     getMarkupComponent: tagName => tagName
   })({})
 

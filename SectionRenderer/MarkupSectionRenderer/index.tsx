@@ -1,10 +1,9 @@
-import { CreateElement, ElementTypeGetter, Node } from '../../types'
+import { ElementTypeGetter, Node } from '../../types'
 import { Markup, Atom, MarkupSection } from '../../types/Mobiledoc'
 import { throwError } from '../../utils'
 import MarkersRenderer from '../MarkersRenderer'
 
 export interface Options {
-  createElement: CreateElement
   getAtomComponent: ElementTypeGetter
   getMarkupComponent: ElementTypeGetter
 }
@@ -23,26 +22,22 @@ const attributesArrayToAttributes = (attributesArray: string[]): object =>
     {}
   )
 
-export default ({
-  createElement,
-  getAtomComponent,
-  getMarkupComponent
-}: Options) => ({ markups, atoms }: Context) => ([
-  ,
-  tagName,
-  markers,
-  attributes
-]: MarkupSection): Node =>
-  createElement(
+export default ({ getAtomComponent, getMarkupComponent }: Options) => ({
+  markups,
+  atoms
+}: Context) => ([, tagName, markers, attributes]: MarkupSection): Node => {
+  const Tag =
     getMarkupComponent(tagName) ||
-      throwError(
-        `Unhandled element: the markup section \`'${tagName}'\` has no corresponding handler.`
-      ),
-    attributesArrayToAttributes(attributes || []),
-    ...MarkersRenderer({ createElement, getAtomComponent, getMarkupComponent })(
-      {
+    throwError(
+      `Unhandled element: the markup section \`'${tagName}'\` has no corresponding handler.`
+    )
+
+  return (
+    <Tag {...attributesArrayToAttributes(attributes || [])}>
+      {MarkersRenderer({ getAtomComponent, getMarkupComponent })({
         markups,
         atoms
-      }
-    )(markers)
+      })(markers)}
+    </Tag>
   )
+}

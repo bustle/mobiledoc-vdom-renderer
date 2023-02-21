@@ -4,15 +4,16 @@ import AtomRenderer from '.'
 
 const atom = ['atom-type', 'Atom text', { attribute: 'foo' }]
 
-testRenderPipelines(({ name, createElement, renderHtml }) => {
+testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = AtomRenderer({
-    createElement,
-    getAtomComponent: type =>
+    getAtomComponent: Type =>
       name === 'ultradom'
-        ? ({ payload }, children) =>
-            createElement(type, { attribute: payload.attribute }, children)
-        : ({ payload, children }) =>
-            createElement(type, { attribute: payload.attribute }, children)
+        ? ({ payload }, children) => (
+            <Type attribute={payload.attribute}>{children}</Type>
+          )
+        : ({ payload, children }) => (
+            <Type attribute={payload.attribute}>{children}</Type>
+          )
   })
 
   test(`${name}: renders a basic atom`, t =>
