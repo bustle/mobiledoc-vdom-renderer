@@ -6,9 +6,9 @@ const listSection = [3, 'ul', [[[0, [], 0, 'Item 1']], [[0, [], 0, 'Item 2']]]]
 
 testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = ListSectionRenderer({
-    getMarkupComponent: tagName => tagName
+    getMarkupComponent: (tagName) => tagName,
   })({})
 
-  test(`${name}: renders a list section`, t =>
+  test(`${name}: renders a list section`, (t) =>
     t.snapshot(renderHtml(renderVdom(listSection))))
 })

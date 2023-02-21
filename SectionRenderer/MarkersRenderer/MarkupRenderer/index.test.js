@@ -7,9 +7,9 @@ const children = ['Example']
 
 testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = MarkupRenderer({
-    getMarkupComponent: type => type
+    getMarkupComponent: (type) => type,
   })
 
-  test(`${name}: renders a basic markup`, t =>
+  test(`${name}: renders a basic markup`, (t) =>
     t.snapshot(renderHtml(renderVdom(markup, children))))
 })

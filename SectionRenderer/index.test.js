@@ -9,20 +9,20 @@ const cardSection = [10, 0]
 
 testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = SectionRenderer({
-    getAtomComponent: type => type,
-    getCardComponent: type => type,
-    getMarkupComponent: tagName => tagName
+    getAtomComponent: (type) => type,
+    getCardComponent: (type) => type,
+    getMarkupComponent: (tagName) => tagName,
   })({ cards: [['card-type', {}]] })
 
-  test(`${name}: renders a markup section`, t =>
+  test(`${name}: renders a markup section`, (t) =>
     t.snapshot(renderHtml(renderVdom(markupSection))))
 
-  test(`${name}: renders an image section`, t =>
+  test(`${name}: renders an image section`, (t) =>
     t.snapshot(renderHtml(renderVdom(imageSection))))
 
-  test(`${name}: renders a list section`, t =>
+  test(`${name}: renders a list section`, (t) =>
     t.snapshot(renderHtml(renderVdom(listSection))))
 
-  test(`${name}: renders a card section`, t =>
+  test(`${name}: renders a card section`, (t) =>
     t.snapshot(renderHtml(renderVdom(cardSection))))
 })

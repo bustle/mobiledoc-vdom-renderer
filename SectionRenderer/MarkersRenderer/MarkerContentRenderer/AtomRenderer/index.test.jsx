@@ -6,16 +6,12 @@ const atom = ['atom-type', 'Atom text', { attribute: 'foo' }]
 
 testRenderPipelines(({ name, renderHtml }) => {
   const renderVdom = AtomRenderer({
-    getAtomComponent: Type =>
-      name === 'ultradom'
-        ? ({ payload }, children) => (
-            <Type attribute={payload.attribute}>{children}</Type>
-          )
-        : ({ payload, children }) => (
-            <Type attribute={payload.attribute}>{children}</Type>
-          )
+    getAtomComponent:
+      (Type) =>
+      ({ payload, children }) =>
+        <Type attribute={payload.attribute}>{children}</Type>,
   })
 
-  test(`${name}: renders a basic atom`, t =>
+  test(`${name}: renders a basic atom`, (t) =>
     t.snapshot(renderHtml(renderVdom(atom))))
 })

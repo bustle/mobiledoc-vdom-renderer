@@ -56,10 +56,9 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "jsdom": "^12.0.0",
     "nyc": "^12.0.2",
     "preact": "^10",
-    "preact-render-to-string": "^5",
+    "preact-render-to-string": "^5.2.6",
     "prettier": "^2.8.4",
     "react": "^18",
     "react-dom": "^18",
@@ -67,8 +66,7 @@
     "tslint": "^5.20.0",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^4",
-    "typescript-eslint-parser": "^18.0.0",
-    "ultradom": "^2.3.4"
+    "typescript-eslint-parser": "^18.0.0"
   },
   "prettier": {
     "printWidth": 80,
